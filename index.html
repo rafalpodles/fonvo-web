@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fonvo — Learn languages by actually speaking them</title>
+<meta name="description" content="Practice real conversations with AI tutors who adapt to your level, correct your mistakes, and help you build vocabulary through natural voice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --purple: #4A2169;
+  --magenta: #9B3D96;
+  --amber: #FF9A23;
+  --coral: #FF6B6B;
+  --mint: #4ECDC4;
+  --cream: #FFF9F0;
+  --warm-white: #FFFDF8;
+  --text: #1a1025;
+  --text-secondary: #5a4a6a;
+  --text-muted: #8a7a9a;
+  --surface: #ffffff;
+  --surface-warm: #fef7ee;
+  --border: rgba(74, 33, 105, 0.08);
+  --shadow-sm: 0 2px 8px rgba(74, 33, 105, 0.06);
+  --shadow-md: 0 8px 32px rgba(74, 33, 105, 0.08);
+  --shadow-lg: 0 20px 60px rgba(74, 33, 105, 0.12);
+  --shadow-glow: 0 0 40px rgba(155, 61, 150, 0.15);
+  --gradient: linear-gradient(135deg, var(--purple), var(--magenta), var(--amber));
+  --gradient-text: linear-gradient(90deg, var(--purple), var(--magenta), var(--amber));
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --nav-height: 72px;
+  --spanish: #F5A623;
+  --english: #4A90D9;
+  --german: #6B7B8D;
+  --polish: #E8839B;
+  --french: #5BA67A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--warm-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* ========== UTILITY ========== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== REVEAL ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.from-left { transform: translateX(-60px); }
+.reveal.from-right { transform: translateX(60px); }
+.reveal.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ========== NAV ========== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+}
+.nav.scrolled {
+  background: rgba(255, 253, 248, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo svg { height: 44px; width: auto; }
+.footer-brand .nav-logo svg { height: 36px; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--purple); }
+.nav-cta {
+  background: var(--gradient);
+  color: white !important;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(155, 61, 150, 0.3);
+}
+.nav-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
+  border-radius: 2px;
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--nav-height);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: float 20s ease-in-out infinite;
+}
+.hero-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(155, 61, 150, 0.3), transparent 70%);
+  top: -10%; right: -10%;
+  animation-delay: 0s;
+}
+.hero-orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 154, 35, 0.25), transparent 70%);
+  bottom: -20%; left: -5%;
+  animation-delay: -7s;
+}
+.hero-orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(78, 205, 196, 0.2), transparent 70%);
+  top: 30%; left: 40%;
+  animation-delay: -14s;
+}
+.hero-mouse-glow {
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155, 61, 150, 0.06), transparent 60%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 0.3s ease-out, top 0.3s ease-out;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 35px) scale(1.02); }
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding: 60px 0;
+}
+.hero-content { max-width: 560px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(74, 33, 105, 0.06);
+  border: 1px solid rgba(74, 33, 105, 0.1);
+  border-radius: 100px;
+  padding: 6px 16px 6px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--purple);
+  margin-bottom: 24px;
+}
+.hero-badge-dot {
+  width: 8px; height: 8px;
+  background: var(--mint);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.hero h1 .animated-gradient {
+  background: linear-gradient(90deg, var(--purple), var(--magenta), var(--amber), var(--purple));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.hero p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gradient);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(155, 61, 150, 0.35);
+}
+.btn-primary svg { width: 20px; height: 20px; }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  padding: 16px 24px;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: rgba(74, 33, 105, 0.2);
+  background: white;
+  color: var(--purple);
+}
+
+/* Phone mockup */
+.hero-phone {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.phone-mockup {
+  width: 280px;
+  height: 580px;
+  background: var(--surface);
+  border-radius: 40px;
+  border: 3px solid #e0d8e8;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(74, 33, 105, 0.04);
+  overflow: hidden;
+  position: relative;
+  transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.phone-mockup:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+.phone-notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 25px;
+  background: #1a1025;
+  border-radius: 20px;
+  z-index: 2;
+}
+.phone-home-bar {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  z-index: 2;
+}
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.phone-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.phone-screen-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.phone-screen-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 200px;
+}
+.phone-screen-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(155, 61, 150, 0.1), rgba(255, 154, 35, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.phone-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155, 61, 150, 0.12), transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ========== STATS BAR ========== */
+.stats-bar {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+.stat-item h3 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--purple);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-item p {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ========== FEATURES ========== */
+.features { padding: 120px 0; }
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 80px;
+}
+.section-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--magenta);
+  margin-bottom: 16px;
+}
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.section-header p {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 120px;
+}
+.feature-row:last-child { margin-bottom: 0; }
+.feature-row.reversed .feature-text { order: 2; }
+.feature-row.reversed .feature-visual { order: 1; }
+.feature-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--magenta);
+  margin-bottom: 12px;
+}
+.feature-tag-soon {
+  background: linear-gradient(135deg, var(--amber), var(--coral));
+  color: white;
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+}
+.feature-text h3 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.feature-text p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.feature-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.feature-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+.feature-bullets li::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(155, 61, 150, 0.1), rgba(255, 154, 35, 0.1));
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature-visual {
+  position: relative;
+}
+.feature-screenshot {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+}
+.feature-screenshot:hover {
+  transform: translateY(-8px);
+}
+.feature-screenshot:hover .feature-phone-frame {
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+.feature-phone-frame {
+  background: #1a1025;
+  border-radius: 40px;
+  padding: 10px;
+  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.feature-phone-screen {
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.feature-phone-screen::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 22px;
+  background: #1a1025;
+  border-radius: 14px;
+  z-index: 2;
+}
+.feature-phone-screen::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  z-index: 2;
+}
+.feature-phone-screen img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* ========== HOW IT WORKS ========== */
+.how-it-works {
+  padding: 120px 0;
+  background: var(--surface-warm);
+  position: relative;
+  overflow: hidden;
+}
+.how-it-works::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient);
+  opacity: 0.3;
+}
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+.step-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  position: relative;
+  border: 1px solid var(--border);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+}
+.step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.step-number {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.step-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.step-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.step-connector {
+  display: none;
+}
+
+/* ========== TUTORS ========== */
+.tutors {
+  padding: 120px 0;
+  overflow: hidden;
+}
+.tutors-physics {
+  position: relative;
+  margin-top: 60px;
+  max-width: 1100px;
+  height: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tutor-orb {
+  position: absolute;
+  top: 0; left: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: white;
+  border: 6px solid var(--tutor-color, #e0d8e8);
+  box-shadow:
+    0 16px 36px rgba(0,0,0,0.2),
+    0 6px 12px rgba(0,0,0,0.12),
+    inset 0 4px 8px rgba(255,255,255,0.7),
+    inset 0 -10px 20px rgba(0,0,0,0.12),
+    0 0 0 2px rgba(0,0,0,0.05);
+  transition: box-shadow 0.4s, border-color 0.3s;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+}
+.tutor-orb:active { cursor: grabbing; }
+.tutor-orb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), width 0.4s cubic-bezier(0.16,1,0.3,1), height 0.4s cubic-bezier(0.16,1,0.3,1);
+  flex-shrink: 0;
+}
+.tutor-orb-info {
+  position: absolute;
+  bottom: 16%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  padding: 0 8px;
+}
+.tutor-orb-phrase {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 1px;
+}
+.tutor-orb-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+.tutor-orb-lang { display: none; }
+
+.tutor-orb-flag {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  line-height: 1;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+  transition: bottom 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+}
+.tutor-orb.hovered .tutor-orb-flag {
+  bottom: 5%;
+}
+.tutor-orb.hovered {
+  box-shadow:
+    0 30px 70px var(--tutor-shadow, rgba(155,61,150,0.4)),
+    0 16px 32px rgba(0,0,0,0.18),
+    inset 0 5px 10px rgba(255,255,255,0.8),
+    inset 0 -12px 24px rgba(0,0,0,0.15),
+    0 0 0 2px rgba(0,0,0,0.06);
+  border-width: 7px;
+  z-index: 10;
+}
+.tutor-orb.hovered img {
+  transform: translateY(-18%) scale(1.05);
+}
+.tutor-orb.hovered .tutor-orb-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== PRICING ========== */
+.pricing {
+  padding: 120px 0;
+  background: var(--surface-warm);
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 800px;
+  margin: 60px auto 0;
+}
+.pricing-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  border: 2px solid var(--border);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  position: relative;
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.pricing-card.featured {
+  border-color: transparent;
+  background: white;
+  box-shadow: var(--shadow-lg);
+}
+.pricing-card.featured::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius-xl) + 2px);
+  background: var(--gradient);
+  z-index: -1;
+}
+.pricing-card.featured::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  background: white;
+  z-index: -1;
+}
+.pricing-popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gradient);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 16px;
+  border-radius: 100px;
+}
+.pricing-card h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.pricing-price .amount {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+}
+.pricing-price .period {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+.pricing-annual {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+.pricing-features .check {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.pricing-features .check.yes {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(78, 205, 196, 0.05));
+  color: var(--mint);
+}
+.pricing-features .check.no {
+  background: rgba(0,0,0,0.04);
+  color: var(--text-muted);
+}
+.pricing-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s;
+  border: none;
+  cursor: pointer;
+}
+.pricing-btn.outline {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--text);
+}
+.pricing-btn.outline:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+.pricing-btn.gradient {
+  background: var(--gradient);
+  color: white;
+}
+.pricing-btn.gradient:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(155, 61, 150, 0.3);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+.footer-brand p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  max-width: 280px;
+  line-height: 1.6;
+}
+.footer-links {
+  display: flex;
+  gap: 40px;
+}
+.footer-col h4 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--purple); }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.app-store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.app-store-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.app-store-badge small {
+  font-size: 9px;
+  font-weight: 400;
+  display: block;
+  opacity: 0.7;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .tutors-physics { height: 480px; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: block; }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 40px 0;
+  }
+  .hero-content { max-width: 100%; }
+  .hero p { max-width: 100%; }
+  .hero-actions { justify-content: center; }
+  .hero-phone { margin-top: 20px; }
+  .feature-row {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .feature-row.reversed .feature-text,
+  .feature-row.reversed .feature-visual { order: unset; }
+  .feature-visual { order: -1; }
+  .feature-screenshot { max-width: 240px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .tutors-physics { height: 600px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .footer-inner { flex-direction: column; gap: 32px; }
+  .footer-links { gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 32px; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  .phone-mockup { width: 220px; height: 460px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,0) scale(0.41)"><path d="m161.3 5h-44.31c-9.85 0-16.89 8.92-16.89 18.93v9.39h-3.16v-9.84c0-7.76 2.54-14.41 8.39-18.48h-12.7c-5 0-9 4-9 9v108c0 5 4 9 9 9h13.72c5 0 9-4 9-9v-28.04c0-1 0.59-1.64 1.38-1.64h28.33c5.17 0 6.86-5.3 6.86-7.63v-18.36c0-4.47-3.54-8.82-7.26-8.82h-27.56c-1.22 0-1.75-1.06-1.75-1.89v-13.53c0-1.43 1.06-2.41 2.28-2.41h4.88v12.78l15.02-12.78h23.67c5.16 0 7.32-4.32 7.32-6.87v-20.73c0-3.96-2.88-7.08-7.22-7.08zm-36.53 21.41c-3.08 0-4.28-2.48-4.28-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.23 1.85 4.23 4.21 0 2.06-1.62 4.04-3.94 4.04zm14.02 0c-2.62 0-4.12-2.32-4.12-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.14 1.85 4.14 4.21 0 2.06-1.86 4.04-4.01 4.04zm13.57 0c-2.62 0-3.59-2.32-3.59-3.77 0-2.36 1.52-4.48 3.83-4.48 2.76 0 3.41 2.12 3.41 4.21 0 2.06-1.5 4.04-3.65 4.04z" fill="url(#nlc_icon)"/></g><g transform="translate(74,10)"><path d="m23.34 11h-12.84c-8.15 0-10.52 4.78-10.52 12.11v10.9c0 7.33 2.37 11.48 10.52 11.48h12.84c8.15 0 11.37-3.31 11.37-11.48v-10.9c0-7.33-3.22-12.11-11.37-12.11zm1.17 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#nlc_text)"/><path d="m64.43 10.6h-0.92c-5.16 0-8.99 2.03-12.16 4.21l-0.55-3.81h-9.32v34.49h10.09v-23.3c1.7-1.89 4.12-2.81 7.74-2.81 3.22 0 4.29 1.4 4.29 4.62v21.49h10.76v-23.79c0-6.72-3.56-11.1-9.93-11.1z" fill="url(#nlc_text)"/><path d="m95.13 34.1-6.88-23.07h-12.01l13.91 34.49h11.73l11.96-34.49h-10.36l-8.35 23.07z" fill="url(#nlc_text)"/><path d="m140.23 11h-12.84c-8.15 0-11 4.78-11 12.11v10.9c0 7.33 2.85 11.48 11 11.48h12.84c8.15 0 11.11-3.31 11.11-11.48v-10.9c0-7.33-2.96-12.11-11.11-12.11zm0.69 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#nlc_text)"/></g><defs><linearGradient id="nlc_icon" x1="42.83" x2="151.6" y1="119.6" y2="10.89" gradientUnits="userSpaceOnUse"><stop stop-color="#4A2169" offset="0"/><stop stop-color="#9B3D96" offset=".48"/><stop stop-color="#FF9A23" offset="1"/></linearGradient><linearGradient id="nlc_text" x1="0" x2="155" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#9B3D96" offset="0"/><stop stop-color="#FF9A23" offset="1"/></linearGradient></defs></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#tutors">Tutors</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#" class="nav-cta">Download</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-mouse-glow" id="mouseGlow"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <span class="hero-badge-dot"></span>
+        iOS App Available
+      </div>
+      <h1 class="reveal reveal-delay-1">Learn languages by <span class="animated-gradient">actually speaking them</span></h1>
+      <p class="reveal reveal-delay-2">Practice real conversations with AI tutors who adapt to your level, correct your mistakes, and help you build vocabulary &mdash; all through natural voice.</p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download for iOS
+        </a>
+        <a href="#features" class="btn-secondary">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-phone reveal reveal-delay-2">
+      <div class="phone-glow"></div>
+      <div class="phone-mockup" id="heroPhone">
+        <div class="phone-notch"></div>
+        <div class="phone-home-bar"></div>
+        <div class="phone-screen">
+          <img src="assets/screenshots/voice-conversation-spanish.jpg" alt="Fonvo voice conversation with Luna — Spanish tutor correcting mistakes in real time">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <h3><span class="counter" data-target="10">0</span></h3>
+        <p>Languages</p>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <h3><span class="counter" data-target="44">0</span></h3>
+        <p>Conversation Scenarios</p>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <h3><span class="counter" data-target="6">0</span></h3>
+        <p>CEFR Levels</p>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <h3><span class="counter" data-target="3">0</span></h3>
+        <p>Conversation Modes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Why Fonvo</span>
+      <h2>Everything you need to <span class="gradient-text">actually improve</span></h2>
+      <p>Not just a chatbot. A complete learning system that turns every conversation into progress.</p>
+    </div>
+
+    <!-- Feature 1: Learning Loop -->
+    <div class="feature-row">
+      <div class="feature-text reveal from-left">
+        <span class="feature-tag">Core Feature</span>
+        <h3>Complete Learning Loop</h3>
+        <p>Talk, get feedback, learn new words, review with flashcards &mdash; everything connected in one seamless cycle.</p>
+        <ul class="feature-bullets">
+          <li>AI analyzes every mistake after each session</li>
+          <li>New words auto-extracted into your vocabulary</li>
+          <li>SM-2 spaced repetition flashcards</li>
+          <li>Weak words naturally appear in future conversations</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal from-right">
+        <div class="feature-screenshot">
+          <div class="feature-phone-frame"><div class="feature-phone-screen">
+            <img src="assets/screenshots/transcript-error-review.jpg" alt="Post-conversation transcript with color-coded error analysis">
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2: Realtime Voice -->
+    <div class="feature-row reversed">
+      <div class="feature-text reveal from-right">
+        <span class="feature-tag">Breakthrough Tech</span>
+        <h3>Realtime Voice Conversations</h3>
+        <p>No buttons. No waiting. Just talk naturally and your AI tutor responds in under a second, with server-side voice detection handling the flow.</p>
+        <ul class="feature-bullets">
+          <li>~300ms response time via WebSocket</li>
+          <li>Hands-free with Voice Activity Detection</li>
+          <li>Natural turn-taking, like a real conversation</li>
+          <li>Classic tap-to-talk mode also available</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal from-left">
+        <div class="feature-screenshot">
+          <div class="feature-phone-frame"><div class="feature-phone-screen">
+            <img src="assets/screenshots/text-chat-english.jpg" alt="Realtime conversation with AI tutor Alfie in text chat mode">
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3: Tutors -->
+    <div class="feature-row">
+      <div class="feature-text reveal from-left">
+        <span class="feature-tag">Personal Touch</span>
+        <h3>10 Animated Tutors With Personality</h3>
+        <p>Each language comes with a unique AI character who has their own personality, teaching style, and animated expressions. Not a generic chatbot &mdash; your personal tutor.</p>
+        <ul class="feature-bullets">
+          <li>Animated reactions: speaking, thinking, listening</li>
+          <li>Personality-driven conversations</li>
+          <li>Adaptive difficulty based on your CEFR level</li>
+          <li>10 languages: Spanish, English, German, Polish, French, Italian, Portuguese, Japanese, Korean, Chinese</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal from-right">
+        <div class="feature-screenshot">
+          <div class="feature-phone-frame"><div class="feature-phone-screen">
+            <img src="assets/screenshots/home-english-tutor.jpg" alt="Home screen with Alfie — your English AI tutor">
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 4: Pronunciation -->
+    <div class="feature-row reversed">
+      <div class="feature-text reveal from-right">
+        <span class="feature-tag">Coming Soon <span class="feature-tag-soon">New</span></span>
+        <h3>Pronunciation Training</h3>
+        <p>Dedicated exercises to drill your pronunciation, plus integrated feedback after every conversation so you know exactly what to improve.</p>
+        <ul class="feature-bullets">
+          <li>Standalone pronunciation module</li>
+          <li>Post-conversation pronunciation feedback</li>
+          <li>Visual feedback and comparison</li>
+          <li>Track improvement over time</li>
+        </ul>
+      </div>
+      <div class="feature-visual reveal from-left">
+        <div class="feature-screenshot">
+          <div class="feature-phone-frame"><div class="feature-phone-screen">
+            <img src="assets/screenshots/progress-dashboard.jpg" alt="Progress dashboard with conversation stats, streaks, and score charts">
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">How It Works</span>
+      <h2>From zero to speaking in <span class="gradient-text">4 simple steps</span></h2>
+      <p>No complicated setup. No textbooks. Just start talking.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-number">01</div>
+        <h3>Pick a language</h3>
+        <p>Choose from Spanish, English, German, Polish, or French. Set your CEFR level from A1 (beginner) to C2 (native).</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-number">02</div>
+        <h3>Choose a scenario</h3>
+        <p>At a cafe, job interview, asking directions &mdash; or just go free-form. Your tutor adapts to any topic.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-number">03</div>
+        <h3>Talk naturally</h3>
+        <p>Speak with your AI tutor using voice or text. Get response suggestions when you're stuck. No judgment, just practice.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-4">
+        <div class="step-number">04</div>
+        <h3>Review &amp; grow</h3>
+        <p>See every mistake color-coded with corrections. Save new words to flashcards. Watch your progress on the dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TUTORS ===== -->
+<section class="tutors" id="tutors">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Meet Your Tutors</span>
+      <h2>10 characters, <span class="gradient-text">10 languages</span></h2>
+      <p>Each tutor brings their own warmth, style, and teaching approach. Push them around!</p>
+    </div>
+    <div class="tutors-physics" id="tutorsPhysics"></div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Pricing</span>
+      <h2>Start free. <span class="gradient-text">Upgrade when ready.</span></h2>
+      <p>Try Fonvo with no commitment. Upgrade to unlock everything.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal reveal-delay-1">
+        <h3>Free</h3>
+        <div class="pricing-price">
+          <span class="amount">$0</span>
+          <span class="period">/forever</span>
+        </div>
+        <p class="pricing-annual">No credit card required</p>
+        <ul class="pricing-features">
+          <li><span class="check yes">&#10003;</span> 3 conversations per day</li>
+          <li><span class="check yes">&#10003;</span> Basic error analysis</li>
+          <li><span class="check yes">&#10003;</span> Limited flashcards</li>
+          <li><span class="check yes">&#10003;</span> All 5 languages</li>
+          <li><span class="check no">&mdash;</span> Realtime voice mode</li>
+          <li><span class="check no">&mdash;</span> Pronunciation training</li>
+          <li><span class="check no">&mdash;</span> Unlimited flashcards</li>
+        </ul>
+        <a href="#" class="pricing-btn outline">Get Started Free</a>
+      </div>
+      <div class="pricing-card featured reveal reveal-delay-2">
+        <div class="pricing-popular">Most Popular</div>
+        <h3>Premium</h3>
+        <div class="pricing-price">
+          <span class="amount gradient-text">$8</span>
+          <span class="period">/month</span>
+        </div>
+        <p class="pricing-annual">or $60/year (save 37%)</p>
+        <ul class="pricing-features">
+          <li><span class="check yes">&#10003;</span> Unlimited conversations</li>
+          <li><span class="check yes">&#10003;</span> Full error analysis</li>
+          <li><span class="check yes">&#10003;</span> Realtime voice mode</li>
+          <li><span class="check yes">&#10003;</span> Pronunciation training</li>
+          <li><span class="check yes">&#10003;</span> Unlimited SRS flashcards</li>
+          <li><span class="check yes">&#10003;</span> All scenarios</li>
+          <li><span class="check yes">&#10003;</span> Priority AI models</li>
+        </ul>
+        <a href="#" class="pricing-btn gradient">Start Free Trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,0) scale(0.41)"><path d="m161.3 5h-44.31c-9.85 0-16.89 8.92-16.89 18.93v9.39h-3.16v-9.84c0-7.76 2.54-14.41 8.39-18.48h-12.7c-5 0-9 4-9 9v108c0 5 4 9 9 9h13.72c5 0 9-4 9-9v-28.04c0-1 0.59-1.64 1.38-1.64h28.33c5.17 0 6.86-5.3 6.86-7.63v-18.36c0-4.47-3.54-8.82-7.26-8.82h-27.56c-1.22 0-1.75-1.06-1.75-1.89v-13.53c0-1.43 1.06-2.41 2.28-2.41h4.88v12.78l15.02-12.78h23.67c5.16 0 7.32-4.32 7.32-6.87v-20.73c0-3.96-2.88-7.08-7.22-7.08zm-36.53 21.41c-3.08 0-4.28-2.48-4.28-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.23 1.85 4.23 4.21 0 2.06-1.62 4.04-3.94 4.04zm14.02 0c-2.62 0-4.12-2.32-4.12-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.14 1.85 4.14 4.21 0 2.06-1.86 4.04-4.01 4.04zm13.57 0c-2.62 0-3.59-2.32-3.59-3.77 0-2.36 1.52-4.48 3.83-4.48 2.76 0 3.41 2.12 3.41 4.21 0 2.06-1.5 4.04-3.65 4.04z" fill="url(#flc_icon)"/></g><g transform="translate(74,10)"><path d="m23.34 11h-12.84c-8.15 0-10.52 4.78-10.52 12.11v10.9c0 7.33 2.37 11.48 10.52 11.48h12.84c8.15 0 11.37-3.31 11.37-11.48v-10.9c0-7.33-3.22-12.11-11.37-12.11zm1.17 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/><path d="m64.43 10.6h-0.92c-5.16 0-8.99 2.03-12.16 4.21l-0.55-3.81h-9.32v34.49h10.09v-23.3c1.7-1.89 4.12-2.81 7.74-2.81 3.22 0 4.29 1.4 4.29 4.62v21.49h10.76v-23.79c0-6.72-3.56-11.1-9.93-11.1z" fill="url(#flc_text)"/><path d="m95.13 34.1-6.88-23.07h-12.01l13.91 34.49h11.73l11.96-34.49h-10.36l-8.35 23.07z" fill="url(#flc_text)"/><path d="m140.23 11h-12.84c-8.15 0-11 4.78-11 12.11v10.9c0 7.33 2.85 11.48 11 11.48h12.84c8.15 0 11.11-3.31 11.11-11.48v-10.9c0-7.33-2.96-12.11-11.11-12.11zm0.69 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/></g><defs><linearGradient id="flc_icon" x1="42.83" x2="151.6" y1="119.6" y2="10.89" gradientUnits="userSpaceOnUse"><stop stop-color="#4A2169" offset="0"/><stop stop-color="#9B3D96" offset=".48"/><stop stop-color="#FF9A23" offset="1"/></linearGradient><linearGradient id="flc_text" x1="0" x2="155" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#9B3D96" offset="0"/><stop stop-color="#FF9A23" offset="1"/></linearGradient></defs></svg>
+        </a>
+        <p>Practice languages through real conversations with AI tutors. Made with care. No tracking. No ads.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#tutors">Tutors</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Fonvo. All rights reserved.</p>
+      <a href="#" class="app-store-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div><small>Download on the</small>App Store</div>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://d3js.org/d3-dispatch.v3.min.js"></script>
+<script src="https://d3js.org/d3-quadtree.v3.min.js"></script>
+<script src="https://d3js.org/d3-timer.v3.min.js"></script>
+<script src="https://d3js.org/d3-force.v3.min.js"></script>
+<script>
+// ===== Tutor Physics (d3-force) =====
+(function() {
+  const container = document.getElementById('tutorsPhysics');
+  if (!container) return;
+
+  const W = Math.min(container.offsetWidth || 900, 1100);
+  const H = 520;
+  const EXPAND = 30;
+
+  const nodes = [
+    { name: 'Luna', lang: 'Spanish', phrase: '¡Hola! Soy Luna', flag: '🇪🇸', img: 'assets/avatars/luna_spanish.png', color: '#F5A623', r: 75 },
+    { name: 'Alfie', lang: 'English', phrase: "Hey! I'm Alfie", flag: '🇬🇧', img: 'assets/avatars/alfie_english.png', color: '#4A90D9', r: 70 },
+    { name: 'Elsa', lang: 'German', phrase: 'Hallo! Ich bin Elsa', flag: '🇩🇪', img: 'assets/avatars/elsa_german.png', color: '#6B7B8D', r: 68 },
+    { name: 'Kasia', lang: 'Polish', phrase: 'Cześć! Jestem Kasia', flag: '🇵🇱', img: 'assets/avatars/kasia_polish.png', color: '#E8839B', r: 72 },
+    { name: 'Émile', lang: 'French', phrase: 'Bonjour ! Je suis Émile', flag: '🇫🇷', img: 'assets/avatars/émile_french.png', color: '#5BA67A', r: 66 },
+    { name: 'Sofia', lang: 'Italian', phrase: 'Ciao! Sono Sofia', flag: '🇮🇹', img: 'assets/avatars/sofia_italian.png', color: '#E07B4B', r: 73 },
+    { name: 'Mateo', lang: 'Portuguese', phrase: 'Olá! Eu sou Mateo', flag: '🇧🇷', img: 'assets/avatars/mateo_portuguese.png', color: '#3A9E5C', r: 69 },
+    { name: 'Yuki', lang: 'Japanese', phrase: 'こんにちは！ユキです', flag: '🇯🇵', img: 'assets/avatars/yuki_japanese.png', color: '#C44569', r: 74 },
+    { name: 'Mina', lang: 'Korean', phrase: '안녕하세요! 미나예요', flag: '🇰🇷', img: 'assets/avatars/mina_korean.png', color: '#6C5CE7', r: 67 },
+    { name: 'Wei', lang: 'Chinese', phrase: '你好！我是小威', flag: '🇨🇳', img: 'assets/avatars/wei_chinese.png', color: '#D63031', r: 71 },
+  ];
+
+  // Init positions scattered
+  nodes.forEach((n, i) => {
+    n.x = (W / (nodes.length + 1)) * (i + 1) + (Math.random() - 0.5) * 80;
+    n.y = H / 2 + (Math.random() - 0.5) * 100;
+    n.currentR = n.r;
+  });
+
+  // Build DOM
+  const orbs = nodes.map(n => {
+    const el = document.createElement('div');
+    el.className = 'tutor-orb';
+    el.style.cssText = `width:${n.r*2}px;height:${n.r*2}px;--tutor-color:${n.color};--tutor-shadow:${n.color}40;`;
+    el.innerHTML = `<img src="${n.img}" alt="${n.name}"><div class="tutor-orb-flag">${n.flag}</div><div class="tutor-orb-info"><div class="tutor-orb-phrase">${n.phrase}</div><div class="tutor-orb-name">${n.name}</div><div class="tutor-orb-lang">${n.lang}</div></div>`;
+    container.appendChild(el);
+    return el;
+  });
+
+  // Collision force using currentR
+  function collideRadius(d) { return d.currentR + 4; }
+
+  const simulation = d3.forceSimulation(nodes)
+    .force('center', d3.forceCenter(W / 2, H / 2).strength(0.05))
+    .force('collide', d3.forceCollide().radius(collideRadius).strength(0.8).iterations(3))
+    .force('x', d3.forceX(W / 2).strength(0.02))
+    .force('y', d3.forceY(H / 2).strength(0.04))
+    .force('bounds', function() {
+      // Custom force to keep nodes inside bounds
+      for (const n of nodes) {
+        const r = n.currentR;
+        if (n.x - r < 0) { n.x = r; n.vx = Math.abs(n.vx || 0) * 0.5; }
+        if (n.x + r > W) { n.x = W - r; n.vx = -(Math.abs(n.vx || 0) * 0.5); }
+        if (n.y - r < 0) { n.y = r; n.vy = Math.abs(n.vy || 0) * 0.5; }
+        if (n.y + r > H) { n.y = H - r; n.vy = -(Math.abs(n.vy || 0) * 0.5); }
+      }
+    })
+    .alphaDecay(0.01)
+    .velocityDecay(0.3)
+    .on('tick', () => {
+      tickTweens();
+      nodes.forEach((n, i) => {
+        const s = n.currentR * 2;
+        orbs[i].style.transform = `translate(${n.x - n.currentR}px, ${n.y - n.currentR}px)`;
+        orbs[i].style.width = s + 'px';
+        orbs[i].style.height = s + 'px';
+      });
+    });
+
+  // Animated radius transitions
+  const tweens = new Map();
+  function animateRadius(node, targetR) {
+    const startR = node.currentR;
+    const startTime = performance.now();
+    const duration = 350;
+    tweens.set(node, { startR, targetR, startTime, duration });
+  }
+  function tickTweens() {
+    const now = performance.now();
+    for (const [node, tw] of tweens) {
+      const t = Math.min((now - tw.startTime) / tw.duration, 1);
+      const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
+      node.currentR = tw.startR + (tw.targetR - tw.startR) * ease;
+      if (t >= 1) tweens.delete(node);
+    }
+    if (tweens.size > 0) {
+      simulation.force('collide', d3.forceCollide().radius(collideRadius).strength(0.8).iterations(3));
+      simulation.alpha(Math.max(simulation.alpha(), 0.3)).restart();
+    }
+  }
+
+  // Hover — expand radius, simulation handles pushing
+  let hoveredIdx = -1;
+  function setHovered(idx) {
+    if (idx === hoveredIdx) return;
+    if (hoveredIdx >= 0) {
+      animateRadius(nodes[hoveredIdx], nodes[hoveredIdx].r);
+      orbs[hoveredIdx].classList.remove('hovered');
+    }
+    hoveredIdx = idx;
+    if (hoveredIdx >= 0) {
+      animateRadius(nodes[hoveredIdx], nodes[hoveredIdx].r + EXPAND);
+      orbs[hoveredIdx].classList.add('hovered');
+    }
+    simulation.force('collide', d3.forceCollide().radius(collideRadius).strength(0.8).iterations(3));
+    simulation.alpha(0.5).restart();
+  }
+
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    let found = -1;
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const dx = nodes[i].x - mx, dy = nodes[i].y - my;
+      if (dx * dx + dy * dy < nodes[i].currentR * nodes[i].currentR) { found = i; break; }
+    }
+    setHovered(found);
+  });
+  container.addEventListener('mouseleave', () => setHovered(-1));
+
+  // Drag
+  let dragNode = null, dragOffsetX = 0, dragOffsetY = 0;
+  container.addEventListener('mousedown', (e) => {
+    const rect = container.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const dx = nodes[i].x - mx, dy = nodes[i].y - my;
+      if (dx * dx + dy * dy < nodes[i].currentR * nodes[i].currentR) {
+        dragNode = nodes[i];
+        dragNode.fx = dragNode.x;
+        dragNode.fy = dragNode.y;
+        simulation.alphaTarget(0.3).restart();
+        break;
+      }
+    }
+  });
+  container.addEventListener('mousemove', (e) => {
+    if (!dragNode) return;
+    const rect = container.getBoundingClientRect();
+    dragNode.fx = e.clientX - rect.left;
+    dragNode.fy = e.clientY - rect.top;
+  });
+  function stopDrag() {
+    if (!dragNode) return;
+    dragNode.fx = null;
+    dragNode.fy = null;
+    dragNode = null;
+    simulation.alphaTarget(0);
+  }
+  container.addEventListener('mouseup', stopDrag);
+  container.addEventListener('mouseleave', stopDrag);
+})()
+
+// ===== Scroll Reveal =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== Nav scroll effect =====
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// ===== Mouse glow on hero =====
+const glow = document.getElementById('mouseGlow');
+const hero = document.getElementById('hero');
+hero.addEventListener('mousemove', (e) => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+
+// ===== Phone parallax tilt =====
+const phone = document.getElementById('heroPhone');
+hero.addEventListener('mousemove', (e) => {
+  const rect = hero.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width - 0.5;
+  const y = (e.clientY - rect.top) / rect.height - 0.5;
+  phone.style.transform = `perspective(1000px) rotateY(${x * -8}deg) rotateX(${y * 5}deg)`;
+});
+hero.addEventListener('mouseleave', () => {
+  phone.style.transform = 'perspective(1000px) rotateY(-5deg) rotateX(2deg)';
+});
+
+// ===== Counter animation =====
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      let current = 0;
+      const duration = 1500;
+      const step = Math.max(1, Math.floor(target / (duration / 30)));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = current;
+      }, 30);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// ===== Smooth scroll for anchor links =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
