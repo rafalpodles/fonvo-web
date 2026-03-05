@@ -624,7 +624,7 @@ body {
 
 /* ========== HOW IT WORKS ========== */
 .how-it-works {
-  padding: 120px 0;
+  padding: 80px 0;
   background: var(--surface-warm);
   position: relative;
   overflow: hidden;
@@ -642,13 +642,13 @@ body {
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 60px;
+  gap: 20px;
+  margin-top: 40px;
 }
 .step-card {
   background: white;
   border-radius: var(--radius-lg);
-  padding: 36px 28px;
+  padding: 24px 20px;
   position: relative;
   border: 1px solid var(--border);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
@@ -659,25 +659,25 @@ body {
 }
 .step-number {
   font-family: var(--font-display);
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 800;
   background: var(--gradient-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .step-card h3 {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .step-card p {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 .step-connector {
   display: none;
@@ -788,6 +788,13 @@ body {
 .tutor-orb.hovered .tutor-orb-info {
   opacity: 1;
   transform: translateY(0);
+}
+.tutor-orb.speaking {
+  animation: speak-pulse 0.6s ease-in-out infinite alternate;
+}
+@keyframes speak-pulse {
+  0% { border-color: var(--tutor-color); }
+  100% { border-color: var(--tutor-color); box-shadow: 0 0 0 8px var(--tutor-shadow), 0 16px 36px rgba(0,0,0,0.2), 0 6px 12px rgba(0,0,0,0.12); }
 }
 
 /* ========== PRICING ========== */
@@ -1255,6 +1262,18 @@ body {
   </div>
 </section>
 
+<!-- ===== TUTORS ===== -->
+<section class="tutors" id="tutors">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Meet Your Tutors</span>
+      <h2>10 characters, <span class="gradient-text">10 languages</span></h2>
+      <p>Each tutor brings their own warmth, style, and teaching approach. Hover to hear them speak!</p>
+    </div>
+    <div class="tutors-physics" id="tutorsPhysics"></div>
+  </div>
+</section>
+
 <!-- ===== FEATURES ===== -->
 <section class="features" id="features">
   <div class="container">
@@ -1385,18 +1404,6 @@ body {
         <p>See every mistake color-coded with corrections. Save new words to flashcards. Watch your progress on the dashboard.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== TUTORS ===== -->
-<section class="tutors" id="tutors">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-label">Meet Your Tutors</span>
-      <h2>10 characters, <span class="gradient-text">10 languages</span></h2>
-      <p>Each tutor brings their own warmth, style, and teaching approach. Push them around!</p>
-    </div>
-    <div class="tutors-physics" id="tutorsPhysics"></div>
   </div>
 </section>
 
@@ -1553,16 +1560,16 @@ body {
 
   const BASE_W = 1100;
   const nodes = [
-    { name: 'Luna', lang: 'Spanish', phrase: '¡Hola! Soy Luna', flag: '🇪🇸', img: 'assets/avatars/luna_spanish.png', color: '#F5A623', baseR: 75 },
-    { name: 'Alfie', lang: 'English', phrase: "Hey! I'm Alfie", flag: '🇬🇧', img: 'assets/avatars/alfie_english.png', color: '#4A90D9', baseR: 70 },
-    { name: 'Elsa', lang: 'German', phrase: 'Hallo! Ich bin Elsa', flag: '🇩🇪', img: 'assets/avatars/elsa_german.png', color: '#6B7B8D', baseR: 68 },
-    { name: 'Kasia', lang: 'Polish', phrase: 'Cześć! Jestem Kasia', flag: '🇵🇱', img: 'assets/avatars/kasia_polish.png', color: '#E8839B', baseR: 72 },
-    { name: 'Émile', lang: 'French', phrase: 'Bonjour ! Je suis Émile', flag: '🇫🇷', img: 'assets/avatars/émile_french.png', color: '#5BA67A', baseR: 66 },
-    { name: 'Sofia', lang: 'Italian', phrase: 'Ciao! Sono Sofia', flag: '🇮🇹', img: 'assets/avatars/sofia_italian.png', color: '#E07B4B', baseR: 73 },
-    { name: 'Mateo', lang: 'Portuguese', phrase: 'Olá! Eu sou Mateo', flag: '🇧🇷', img: 'assets/avatars/mateo_portuguese.png', color: '#3A9E5C', baseR: 69 },
-    { name: 'Yuki', lang: 'Japanese', phrase: 'こんにちは！ユキです', flag: '🇯🇵', img: 'assets/avatars/yuki_japanese.png', color: '#C44569', baseR: 74 },
-    { name: 'Mina', lang: 'Korean', phrase: '안녕하세요! 미나예요', flag: '🇰🇷', img: 'assets/avatars/mina_korean.png', color: '#6C5CE7', baseR: 67 },
-    { name: 'Wei', lang: 'Chinese', phrase: '你好！我是小威', flag: '🇨🇳', img: 'assets/avatars/wei_chinese.png', color: '#D63031', baseR: 71 },
+    { name: 'Luna', lang: 'Spanish', phrase: '¡Hola! Soy Luna', flag: '🇪🇸', img: 'assets/avatars/luna_spanish.png', color: '#F5A623', baseR: 75, audio: 'luna' },
+    { name: 'Alfie', lang: 'English', phrase: "Hey! I'm Alfie", flag: '🇬🇧', img: 'assets/avatars/alfie_english.png', color: '#4A90D9', baseR: 70, audio: 'alfie' },
+    { name: 'Elsa', lang: 'German', phrase: 'Hallo! Ich bin Elsa', flag: '🇩🇪', img: 'assets/avatars/elsa_german.png', color: '#6B7B8D', baseR: 68, audio: 'elsa' },
+    { name: 'Kasia', lang: 'Polish', phrase: 'Cześć! Jestem Kasia', flag: '🇵🇱', img: 'assets/avatars/kasia_polish.png', color: '#E8839B', baseR: 72, audio: 'kasia' },
+    { name: 'Émile', lang: 'French', phrase: 'Bonjour ! Je suis Émile', flag: '🇫🇷', img: 'assets/avatars/émile_french.png', color: '#5BA67A', baseR: 66, audio: 'emile' },
+    { name: 'Sofia', lang: 'Italian', phrase: 'Ciao! Sono Sofia', flag: '🇮🇹', img: 'assets/avatars/sofia_italian.png', color: '#E07B4B', baseR: 73, audio: 'sofia' },
+    { name: 'Mateo', lang: 'Portuguese', phrase: 'Olá! Eu sou Mateo', flag: '🇧🇷', img: 'assets/avatars/mateo_portuguese.png', color: '#3A9E5C', baseR: 69, audio: 'mateo' },
+    { name: 'Yuki', lang: 'Japanese', phrase: 'こんにちは！ユキです', flag: '🇯🇵', img: 'assets/avatars/yuki_japanese.png', color: '#C44569', baseR: 74, audio: 'yuki' },
+    { name: 'Mina', lang: 'Korean', phrase: '안녕하세요! 미나예요', flag: '🇰🇷', img: 'assets/avatars/mina_korean.png', color: '#6C5CE7', baseR: 67, audio: 'mina' },
+    { name: 'Wei', lang: 'Chinese', phrase: '你好！我是小威', flag: '🇨🇳', img: 'assets/avatars/wei_chinese.png', color: '#D63031', baseR: 71, audio: 'wei' },
   ];
 
   function getScale() { return Math.max(0.45, Math.min(1, container.offsetWidth / BASE_W)); }
@@ -1652,8 +1659,10 @@ body {
 
   // Hover — expand radius
   let hoveredIdx = -1;
-  function setHovered(idx) {
+  function setHovered(idx, fromTouch) {
     if (idx === hoveredIdx) return;
+    if (idx >= 0 && !fromTouch) playGreeting(idx);
+    if (idx < 0 && playingIdx >= 0 && !fromTouch) { currentAudio.pause(); currentAudio = null; orbs[playingIdx].classList.remove('speaking'); playingIdx = -1; }
     if (hoveredIdx >= 0) {
       animateRadius(nodes[hoveredIdx], nodes[hoveredIdx].r);
       orbs[hoveredIdx].classList.remove('hovered');
@@ -1689,7 +1698,8 @@ body {
     const idx = findNodeAt(touch.clientX - rect.left, touch.clientY - rect.top);
     if (idx >= 0) {
       e.preventDefault();
-      setHovered(idx);
+      setHovered(idx, true);
+      playGreeting(idx);
       // Start drag
       dragNode = nodes[idx];
       dragNode.fx = dragNode.x;
@@ -1710,6 +1720,44 @@ body {
     // Keep hovered for a moment on touch, then clear
     setTimeout(() => setHovered(-1), 1500);
   });
+
+  // Unlock audio on first user interaction (browser autoplay policy)
+  let audioUnlocked = false;
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+    // Play silent buffer to unlock HTML5 Audio for subsequent hover plays
+    const a = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
+    a.volume = 0;
+    a.play().then(() => a.pause()).catch(() => {});
+    document.removeEventListener('click', unlockAudio, true);
+    document.removeEventListener('touchstart', unlockAudio, true);
+  }
+  document.addEventListener('click', unlockAudio, true);
+  document.addEventListener('touchstart', unlockAudio, true);
+
+  // Audio greetings
+  const GREETINGS_COUNT = 5;
+  let currentAudio = null;
+  let playingIdx = -1;
+  function playGreeting(idx) {
+    if (idx < 0) return;
+    // Stop current
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    if (playingIdx === idx) { orbs[playingIdx].classList.remove('speaking'); playingIdx = -1; return; }
+    if (playingIdx >= 0) orbs[playingIdx].classList.remove('speaking');
+    const node = nodes[idx];
+    const rnd = Math.floor(Math.random() * GREETINGS_COUNT) + 1;
+    currentAudio = new Audio(`assets/audio/greetings/${node.audio}_${rnd}.mp3`);
+    playingIdx = idx;
+    orbs[idx].classList.add('speaking');
+    currentAudio.play().catch(() => {});
+    currentAudio.addEventListener('ended', () => {
+      orbs[idx].classList.remove('speaking');
+      playingIdx = -1;
+      currentAudio = null;
+    });
+  }
 
   // Mouse drag
   let dragNode = null;
