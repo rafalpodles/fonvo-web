@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Fonvo</title>
+<meta name="description" content="Fonvo Privacy Policy. Learn how we collect, use, and protect your data.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --purple: #4A2169;
+  --magenta: #9B3D96;
+  --amber: #FF9A23;
+  --coral: #FF6B6B;
+  --mint: #4ECDC4;
+  --cream: #FFF9F0;
+  --warm-white: #FFFDF8;
+  --text: #1a1025;
+  --text-secondary: #5a4a6a;
+  --text-muted: #8a7a9a;
+  --surface: #ffffff;
+  --surface-warm: #fef7ee;
+  --border: rgba(74, 33, 105, 0.08);
+  --shadow-sm: 0 2px 8px rgba(74, 33, 105, 0.06);
+  --shadow-md: 0 8px 32px rgba(74, 33, 105, 0.08);
+  --shadow-lg: 0 20px 60px rgba(74, 33, 105, 0.12);
+  --gradient: linear-gradient(135deg, var(--purple), var(--magenta), var(--amber));
+  --gradient-text: linear-gradient(90deg, var(--purple), var(--magenta), var(--amber));
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --nav-height: 72px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--warm-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== NAV ========== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 253, 248, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo svg { height: 44px; width: auto; margin-left: -40px; }
+.footer-brand .nav-logo svg { height: 36px; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--purple); }
+.nav-cta {
+  background: var(--gradient);
+  color: white !important;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(155, 61, 150, 0.3);
+}
+.nav-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
+  border-radius: 2px;
+}
+
+/* ========== PRIVACY PAGE ========== */
+.privacy-hero {
+  padding: calc(var(--nav-height) + 80px) 0 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.privacy-hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155, 61, 150, 0.08), transparent 70%);
+  pointer-events: none;
+}
+.privacy-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 154, 35, 0.06), transparent 70%);
+  pointer-events: none;
+}
+.privacy-hero h1 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.privacy-hero .subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.privacy-meta {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ========== CONTENT LAYOUT ========== */
+.privacy-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 60px;
+  padding: 60px 0 120px;
+  align-items: start;
+}
+
+/* Table of Contents */
+.toc {
+  position: sticky;
+  top: calc(var(--nav-height) + 24px);
+}
+.toc h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+}
+.toc li {
+  counter-increment: toc;
+}
+.toc a {
+  display: block;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+.toc a::before {
+  content: counter(toc) ". ";
+  color: var(--magenta);
+  font-weight: 600;
+}
+.toc a:hover {
+  color: var(--purple);
+}
+
+/* Main Content */
+.privacy-content {
+  max-width: 760px;
+}
+.privacy-content section {
+  margin-bottom: 48px;
+}
+.privacy-content h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+  line-height: 1.3;
+}
+.privacy-content h2 .section-number {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-right: 8px;
+}
+.privacy-content h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 28px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.privacy-content p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.privacy-content ul, .privacy-content ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+.privacy-content li {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.privacy-content strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.privacy-content a {
+  color: var(--magenta);
+  text-decoration: underline;
+  text-decoration-color: rgba(155, 61, 150, 0.3);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s;
+}
+.privacy-content a:hover {
+  text-decoration-color: var(--magenta);
+}
+
+/* Info Cards */
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.info-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.info-card p, .info-card li {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Provider Table */
+.provider-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.provider-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--surface-warm);
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.provider-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.provider-table tr:last-child td {
+  border-bottom: none;
+}
+.provider-table tbody tr:hover {
+  background: var(--surface-warm);
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(74, 33, 105, 0.04), rgba(155, 61, 150, 0.04));
+  border-left: 3px solid var(--magenta);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.highlight-box p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+.footer-brand p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  max-width: 280px;
+  line-height: 1.6;
+}
+.footer-links {
+  display: flex;
+  gap: 40px;
+}
+.footer-col h4 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--purple); }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.app-store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.app-store-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.app-store-badge small {
+  font-size: 9px;
+  font-weight: 400;
+  display: block;
+  opacity: 0.7;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(255, 253, 248, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 16px 24px 24px;
+    gap: 8px;
+    box-shadow: 0 8px 32px rgba(74, 33, 105, 0.08);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.show { display: flex; }
+  .nav-links li { list-style: none; }
+  .nav-links a { display: block; padding: 12px 0; font-size: 16px; }
+  .nav-cta { text-align: center; margin-top: 8px; }
+  .nav-mobile-toggle { display: block; }
+
+  .privacy-hero h1 { font-size: 36px; }
+  .privacy-meta { flex-direction: column; gap: 8px; }
+
+  .privacy-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .toc {
+    position: static;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .provider-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .footer-inner { flex-direction: column; gap: 32px; }
+  .footer-links { gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+@media (max-width: 480px) {
+  .privacy-hero h1 { font-size: 28px; }
+  .privacy-hero { padding: calc(var(--nav-height) + 48px) 0 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,0) scale(0.41)"><path d="m161.3 5h-44.31c-9.85 0-16.89 8.92-16.89 18.93v9.39h-3.16v-9.84c0-7.76 2.54-14.41 8.39-18.48h-12.7c-5 0-9 4-9 9v108c0 5 4 9 9 9h13.72c5 0 9-4 9-9v-28.04c0-1 0.59-1.64 1.38-1.64h28.33c5.17 0 6.86-5.3 6.86-7.63v-18.36c0-4.47-3.54-8.82-7.26-8.82h-27.56c-1.22 0-1.75-1.06-1.75-1.89v-13.53c0-1.43 1.06-2.41 2.28-2.41h4.88v12.78l15.02-12.78h23.67c5.16 0 7.32-4.32 7.32-6.87v-20.73c0-3.96-2.88-7.08-7.22-7.08zm-36.53 21.41c-3.08 0-4.28-2.48-4.28-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.23 1.85 4.23 4.21 0 2.06-1.62 4.04-3.94 4.04zm14.02 0c-2.62 0-4.12-2.32-4.12-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.14 1.85 4.14 4.21 0 2.06-1.86 4.04-4.01 4.04zm13.57 0c-2.62 0-3.59-2.32-3.59-3.77 0-2.36 1.52-4.48 3.83-4.48 2.76 0 3.41 2.12 3.41 4.21 0 2.06-1.5 4.04-3.65 4.04z" fill="url(#plc_icon)"/></g><g transform="translate(74,10)"><path d="m23.34 11h-12.84c-8.15 0-10.52 4.78-10.52 12.11v10.9c0 7.33 2.37 11.48 10.52 11.48h12.84c8.15 0 11.37-3.31 11.37-11.48v-10.9c0-7.33-3.22-12.11-11.37-12.11zm1.17 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#plc_text)"/><path d="m64.43 10.6h-0.92c-5.16 0-8.99 2.03-12.16 4.21l-0.55-3.81h-9.32v34.49h10.09v-23.3c1.7-1.89 4.12-2.81 7.74-2.81 3.22 0 4.29 1.4 4.29 4.62v21.49h10.76v-23.79c0-6.72-3.56-11.1-9.93-11.1z" fill="url(#plc_text)"/><path d="m95.13 34.1-6.88-23.07h-12.01l13.91 34.49h11.73l11.96-34.49h-10.36l-8.35 23.07z" fill="url(#plc_text)"/><path d="m140.23 11h-12.84c-8.15 0-11 4.78-11 12.11v10.9c0 7.33 2.85 11.48 11 11.48h12.84c8.15 0 11.11-3.31 11.11-11.48v-10.9c0-7.33-2.96-12.11-11.11-12.11zm0.69 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#plc_text)"/></g><defs><linearGradient id="plc_icon" x1="42.83" x2="151.6" y1="119.6" y2="10.89" gradientUnits="userSpaceOnUse"><stop stop-color="#4A2169" offset="0"/><stop stop-color="#9B3D96" offset=".48"/><stop stop-color="#FF9A23" offset="1"/></linearGradient><linearGradient id="plc_text" x1="0" x2="155" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#9B3D96" offset="0"/><stop stop-color="#FF9A23" offset="1"/></linearGradient></defs></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#how-it-works">How it works</a></li>
+      <li><a href="index.html#tutors">Tutors</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="#" class="nav-cta">Download</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="privacy-hero">
+  <div class="container">
+    <h1><span class="gradient-text">Privacy Policy</span></h1>
+    <p class="subtitle">We believe in transparency. Here is exactly what data Fonvo collects, how we use it, and how we protect it.</p>
+    <div class="privacy-meta">
+      <span>Effective: March 5, 2026</span>
+      <span>Last updated: March 5, 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTENT ===== -->
+<div class="container">
+  <div class="privacy-layout">
+
+    <!-- Table of Contents -->
+    <aside class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#who-we-are">Who we are</a></li>
+        <li><a href="#what-we-collect">What we collect</a></li>
+        <li><a href="#authentication">Authentication</a></li>
+        <li><a href="#voice-audio">Voice and audio data</a></li>
+        <li><a href="#ai-providers">Third-party AI providers</a></li>
+        <li><a href="#local-storage">Data stored on your device</a></li>
+        <li><a href="#backend-sync">Data synced to our servers</a></li>
+        <li><a href="#analytics">Analytics</a></li>
+        <li><a href="#security">Security measures</a></li>
+        <li><a href="#cross-border">Cross-border transfers</a></li>
+        <li><a href="#retention">Data retention and deletion</a></li>
+        <li><a href="#gdpr">Your rights (GDPR)</a></li>
+        <li><a href="#children">Children's privacy</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Contact us</a></li>
+      </ol>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="privacy-content">
+
+      <!-- 1. Who We Are -->
+      <section id="who-we-are">
+        <h2><span class="section-number">1.</span> Who we are</h2>
+        <p>Fonvo is an AI-powered language learning app for iOS (Bundle ID: <strong>app.fonvo</strong>). The data controller responsible for your personal data is:</p>
+        <div class="info-card">
+          <h4>Data Controller</h4>
+          <p><strong>Rafa&#322; Podle&#347;</strong><br>
+          Sole proprietorship (JDG), Poland<br>
+          Email: <a href="mailto:contact@fonvo.app">contact@fonvo.app</a></p>
+        </div>
+      </section>
+
+      <!-- 2. What We Collect -->
+      <section id="what-we-collect">
+        <h2><span class="section-number">2.</span> What we collect</h2>
+        <p>Fonvo collects only the data necessary to provide you with a personalized language learning experience. Here is a summary:</p>
+        <ul>
+          <li><strong>Account information</strong> -- email, display name, OAuth provider identifier</li>
+          <li><strong>Conversation data</strong> -- messages you exchange with AI tutors, including error analyses and translations</li>
+          <li><strong>Vocabulary data</strong> -- words and phrases extracted from your conversations, along with spaced repetition progress</li>
+          <li><strong>Learning preferences</strong> -- your chosen language, proficiency level, appearance settings, and AI model preferences</li>
+          <li><strong>Streak and progress data</strong> -- daily activity tracking for motivation features</li>
+        </ul>
+        <div class="highlight-box">
+          <p><strong>What we do NOT collect:</strong> We do not collect your location, contacts, browsing history, or any data unrelated to your language learning. We do not use any third-party analytics SDKs such as Firebase or Amplitude.</p>
+        </div>
+      </section>
+
+      <!-- 3. Authentication -->
+      <section id="authentication">
+        <h2><span class="section-number">3.</span> Authentication</h2>
+        <p>You can sign in to Fonvo using one of the following methods:</p>
+        <ul>
+          <li><strong>Apple Sign-In</strong></li>
+          <li><strong>Google OAuth</strong></li>
+          <li><strong>Email and password</strong></li>
+        </ul>
+        <p>Authentication is handled by <strong>Supabase Auth</strong>. When you sign in, we store your user ID, email address, display name, and OAuth provider identifier. Authentication tokens are securely managed by the Supabase SDK and stored in the iOS Keychain on your device.</p>
+        <p>We never see or store your Apple or Google account passwords. OAuth flows are handled entirely by the respective providers.</p>
+      </section>
+
+      <!-- 4. Voice and Audio Data -->
+      <section id="voice-audio">
+        <h2><span class="section-number">4.</span> Voice and audio data</h2>
+        <p>Fonvo offers voice-based conversation practice. Here is exactly what happens with your audio:</p>
+        <h3>Standard voice mode</h3>
+        <ul>
+          <li>Audio is recorded temporarily on your device (M4A format, 16 kHz, mono)</li>
+          <li>The recording is immediately sent to a speech-to-text service for transcription</li>
+          <li>The audio file is <strong>deleted from your device immediately after transcription</strong></li>
+          <li>Only the transcribed text is stored -- we do not keep audio recordings</li>
+        </ul>
+        <h3>Realtime voice mode</h3>
+        <ul>
+          <li>Audio is streamed in real time via a secure WebSocket (WSS) connection to OpenAI</li>
+          <li>Each session uses a short-lived, single-use ephemeral token</li>
+          <li>No audio is stored on our servers or on your device</li>
+        </ul>
+        <div class="highlight-box">
+          <p><strong>Key point:</strong> Fonvo never persistently stores your voice recordings. Audio exists only for the brief moment needed to convert your speech to text.</p>
+        </div>
+      </section>
+
+      <!-- 5. Third-Party AI Providers -->
+      <section id="ai-providers">
+        <h2><span class="section-number">5.</span> Third-party AI providers</h2>
+        <p>To power conversations, speech recognition, and text-to-speech, Fonvo sends data to the following third-party AI services. Per Apple's App Store guidelines (section 5.1.2(i)), we identify each provider and the data shared with them:</p>
+
+        <table class="provider-table">
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Purpose</th>
+              <th>Data sent</th>
+              <th>Models used</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>OpenAI</strong></td>
+              <td>Chat (fallback), speech-to-text, text-to-speech, realtime voice</td>
+              <td>Conversation messages, system prompts, audio recordings (for transcription), text (for speech synthesis)</td>
+              <td>gpt-4o, gpt-4o-mini, whisper-1, tts-1, gpt-4o-realtime-preview</td>
+            </tr>
+            <tr>
+              <td><strong>OpenRouter</strong></td>
+              <td>Chat completions (primary)</td>
+              <td>Conversation messages, system prompts</td>
+              <td>Routes to Google Gemini, Anthropic Claude, and other models</td>
+            </tr>
+            <tr>
+              <td><strong>ElevenLabs</strong></td>
+              <td>Text-to-speech (primary), speech-to-text</td>
+              <td>Audio recordings (for transcription), text (for speech synthesis)</td>
+              <td>eleven_flash_v2_5, scribe_v2</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Each of these providers processes your data according to their own privacy policies. We encourage you to review them:</p>
+        <ul>
+          <li><a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI Privacy Policy</a></li>
+          <li><a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">OpenRouter Privacy Policy</a></li>
+          <li><a href="https://elevenlabs.io/privacy-policy" target="_blank" rel="noopener">ElevenLabs Privacy Policy</a></li>
+        </ul>
+
+        <p>We use API-level access to these services, meaning your data is processed for inference only and is not used to train their models (subject to each provider's API data usage policies).</p>
+      </section>
+
+      <!-- 6. Data Stored Locally -->
+      <section id="local-storage">
+        <h2><span class="section-number">6.</span> Data stored on your device</h2>
+        <p>Fonvo stores the following data locally on your iPhone:</p>
+        <ul>
+          <li><strong>Conversations</strong> -- messages, error analyses, and translations, saved as JSON files</li>
+          <li><strong>Vocabulary</strong> -- extracted words and phrases with spaced repetition (SRS) scheduling data</li>
+          <li><strong>Preferences</strong> -- language, proficiency level, appearance settings, and model choices</li>
+          <li><strong>Authentication tokens</strong> -- stored in the iOS Keychain</li>
+        </ul>
+        <p>All local files are protected with iOS <strong>Complete File Protection</strong> (<code>.completeFileProtection</code>), which means they are encrypted and inaccessible when your device is locked.</p>
+      </section>
+
+      <!-- 7. Backend Sync -->
+      <section id="backend-sync">
+        <h2><span class="section-number">7.</span> Data synced to our servers</h2>
+        <p>To enable cross-device access and to prevent data loss, the following data is synced to our backend:</p>
+        <ul>
+          <li>Conversations and messages</li>
+          <li>Vocabulary items and SRS progress</li>
+          <li>User preferences</li>
+          <li>Streak and daily activity data</li>
+        </ul>
+        <p>Sync happens asynchronously in the background. All data is transmitted over <strong>HTTPS</strong> (TLS encryption in transit). Our backend runs on <strong>Railway</strong> with a <strong>Supabase PostgreSQL</strong> database.</p>
+      </section>
+
+      <!-- 8. Analytics -->
+      <section id="analytics">
+        <h2><span class="section-number">8.</span> Analytics</h2>
+        <p>Fonvo logs basic usage events locally on your device using Apple's built-in <code>os.Logger</code> framework. These events include:</p>
+        <ul>
+          <li>App launched</li>
+          <li>Conversation started or ended</li>
+          <li>Flashcard review completed</li>
+          <li>Vocabulary extracted</li>
+        </ul>
+        <p>These logs stay on your device and are used only for debugging purposes. <strong>We do not use any third-party analytics services.</strong> No data is sent to Firebase, Amplitude, Mixpanel, or any similar service.</p>
+      </section>
+
+      <!-- 9. Security -->
+      <section id="security">
+        <h2><span class="section-number">9.</span> Security measures</h2>
+        <p>We take the security of your data seriously. Here are the measures in place:</p>
+        <ul>
+          <li><strong>API keys</strong> are fetched fresh after authentication, held in memory only, and never written to disk</li>
+          <li><strong>Keychain storage</strong> uses <code>kSecAttrAccessibleWhenUnlockedThisDeviceOnly</code>, meaning credentials are only accessible when your device is unlocked and never backed up to other devices</li>
+          <li><strong>All network communication</strong> uses HTTPS (TLS) or WSS (secure WebSockets)</li>
+          <li><strong>Ephemeral tokens</strong> are used for realtime voice sessions -- they are short-lived and valid for a single session only</li>
+          <li><strong>Local files</strong> are encrypted at rest with iOS Complete File Protection</li>
+        </ul>
+      </section>
+
+      <!-- 10. Cross-Border Transfers -->
+      <section id="cross-border">
+        <h2><span class="section-number">10.</span> Cross-border data transfers</h2>
+        <p>Your data may be processed in the following locations:</p>
+        <table class="provider-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Fonvo Backend (Railway)</td><td>United States</td></tr>
+            <tr><td>Supabase</td><td>United States</td></tr>
+            <tr><td>OpenAI</td><td>United States</td></tr>
+            <tr><td>ElevenLabs</td><td>United States / United Kingdom</td></tr>
+            <tr><td>OpenRouter</td><td>United States</td></tr>
+          </tbody>
+        </table>
+        <p>For users in the European Economic Area (EEA), transfers to the United States and other countries outside the EEA are safeguarded by <strong>Standard Contractual Clauses (SCCs)</strong> or equivalent mechanisms as required by the GDPR.</p>
+      </section>
+
+      <!-- 11. Retention & Deletion -->
+      <section id="retention">
+        <h2><span class="section-number">11.</span> Data retention and deletion</h2>
+        <h3>How long we keep your data</h3>
+        <p>Your data is retained for as long as you maintain an active Fonvo account. There is no automatic expiration -- your conversations, vocabulary, and progress remain available until you choose to delete them.</p>
+
+        <h3>Deleting your account</h3>
+        <p>You can delete your account from within the app (Profile &gt; Settings &gt; Delete Account). When you delete your account:</p>
+        <ul>
+          <li>All server-side data is permanently deleted via a cascading delete operation</li>
+          <li>This includes your profile, conversations, vocabulary, preferences, and streak data</li>
+          <li>This action is <strong>irreversible</strong></li>
+        </ul>
+        <p>Data stored locally on your device remains until you uninstall the Fonvo app. Uninstalling the app removes all local data.</p>
+      </section>
+
+      <!-- 12. GDPR Rights -->
+      <section id="gdpr">
+        <h2><span class="section-number">12.</span> Your rights (GDPR)</h2>
+        <p>If you are located in the European Economic Area, you have the following rights under the General Data Protection Regulation:</p>
+        <ul>
+          <li><strong>Right of access</strong> -- request a copy of the personal data we hold about you</li>
+          <li><strong>Right to rectification</strong> -- request correction of inaccurate or incomplete data</li>
+          <li><strong>Right to erasure</strong> -- request deletion of your personal data (also available via in-app account deletion)</li>
+          <li><strong>Right to restriction</strong> -- request that we limit how we process your data</li>
+          <li><strong>Right to data portability</strong> -- receive your data in a structured, machine-readable format</li>
+          <li><strong>Right to object</strong> -- object to certain types of processing</li>
+          <li><strong>Right to withdraw consent</strong> -- where processing is based on consent, you may withdraw it at any time</li>
+        </ul>
+        <p>To exercise any of these rights, please contact us at <a href="mailto:contact@fonvo.app">contact@fonvo.app</a>. We will respond within 30 days.</p>
+        <p>You also have the right to lodge a complaint with your local data protection authority. In Poland, the supervisory authority is:</p>
+        <div class="info-card">
+          <h4>Supervisory Authority</h4>
+          <p><strong>UODO</strong> (Urz&#261;d Ochrony Danych Osobowych)<br>
+          ul. Stawki 2, 00-193 Warsaw, Poland<br>
+          <a href="https://uodo.gov.pl" target="_blank" rel="noopener">uodo.gov.pl</a></p>
+        </div>
+      </section>
+
+      <!-- 13. Children -->
+      <section id="children">
+        <h2><span class="section-number">13.</span> Children's privacy</h2>
+        <p>Fonvo is not directed at children under the age of 13. We do not knowingly collect personal data from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:contact@fonvo.app">contact@fonvo.app</a> and we will promptly delete the data.</p>
+        <p>Users between the ages of 13 and 16 (or the applicable age of consent in their jurisdiction) should have a parent or guardian review this privacy policy before using Fonvo.</p>
+      </section>
+
+      <!-- 14. Changes -->
+      <section id="changes">
+        <h2><span class="section-number">14.</span> Changes to this policy</h2>
+        <p>We may update this privacy policy from time to time. When we make changes, we will update the "Last updated" date at the top of this page. For significant changes, we will notify you through the app or via email.</p>
+        <p>We encourage you to review this policy periodically to stay informed about how we protect your data.</p>
+      </section>
+
+      <!-- 15. Contact -->
+      <section id="contact">
+        <h2><span class="section-number">15.</span> Contact us</h2>
+        <p>If you have any questions about this privacy policy, your personal data, or want to exercise your rights, please reach out:</p>
+        <div class="info-card">
+          <h4>Contact</h4>
+          <p><strong>Email:</strong> <a href="mailto:contact@fonvo.app">contact@fonvo.app</a><br>
+          <strong>Data Controller:</strong> Rafa&#322; Podle&#347;, Poland</p>
+        </div>
+        <p>We aim to respond to all inquiries within 30 days.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,0) scale(0.41)"><path d="m161.3 5h-44.31c-9.85 0-16.89 8.92-16.89 18.93v9.39h-3.16v-9.84c0-7.76 2.54-14.41 8.39-18.48h-12.7c-5 0-9 4-9 9v108c0 5 4 9 9 9h13.72c5 0 9-4 9-9v-28.04c0-1 0.59-1.64 1.38-1.64h28.33c5.17 0 6.86-5.3 6.86-7.63v-18.36c0-4.47-3.54-8.82-7.26-8.82h-27.56c-1.22 0-1.75-1.06-1.75-1.89v-13.53c0-1.43 1.06-2.41 2.28-2.41h4.88v12.78l15.02-12.78h23.67c5.16 0 7.32-4.32 7.32-6.87v-20.73c0-3.96-2.88-7.08-7.22-7.08zm-36.53 21.41c-3.08 0-4.28-2.48-4.28-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.23 1.85 4.23 4.21 0 2.06-1.62 4.04-3.94 4.04zm14.02 0c-2.62 0-4.12-2.32-4.12-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.14 1.85 4.14 4.21 0 2.06-1.86 4.04-4.01 4.04zm13.57 0c-2.62 0-3.59-2.32-3.59-3.77 0-2.36 1.52-4.48 3.83-4.48 2.76 0 3.41 2.12 3.41 4.21 0 2.06-1.5 4.04-3.65 4.04z" fill="url(#flc_icon)"/></g><g transform="translate(74,10)"><path d="m23.34 11h-12.84c-8.15 0-10.52 4.78-10.52 12.11v10.9c0 7.33 2.37 11.48 10.52 11.48h12.84c8.15 0 11.37-3.31 11.37-11.48v-10.9c0-7.33-3.22-12.11-11.37-12.11zm1.17 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/><path d="m64.43 10.6h-0.92c-5.16 0-8.99 2.03-12.16 4.21l-0.55-3.81h-9.32v34.49h10.09v-23.3c1.7-1.89 4.12-2.81 7.74-2.81 3.22 0 4.29 1.4 4.29 4.62v21.49h10.76v-23.79c0-6.72-3.56-11.1-9.93-11.1z" fill="url(#flc_text)"/><path d="m95.13 34.1-6.88-23.07h-12.01l13.91 34.49h11.73l11.96-34.49h-10.36l-8.35 23.07z" fill="url(#flc_text)"/><path d="m140.23 11h-12.84c-8.15 0-11 4.78-11 12.11v10.9c0 7.33 2.85 11.48 11 11.48h12.84c8.15 0 11.11-3.31 11.11-11.48v-10.9c0-7.33-2.96-12.11-11.11-12.11zm0.69 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/></g><defs><linearGradient id="flc_icon" x1="42.83" x2="151.6" y1="119.6" y2="10.89" gradientUnits="userSpaceOnUse"><stop stop-color="#4A2169" offset="0"/><stop stop-color="#9B3D96" offset=".48"/><stop stop-color="#FF9A23" offset="1"/></linearGradient><linearGradient id="flc_text" x1="0" x2="155" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#9B3D96" offset="0"/><stop stop-color="#FF9A23" offset="1"/></linearGradient></defs></svg>
+        </a>
+        <p>The language app that actually listens.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#pricing">Pricing</a>
+          <a href="index.html#tutors">Tutors</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="mailto:contact@fonvo.app">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Fonvo. All rights reserved.</p>
+      <a href="#" class="app-store-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div><small>Download on the</small>App Store</div>
+      </a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

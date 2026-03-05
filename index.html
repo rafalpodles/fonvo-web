@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fonvo — Learn languages by actually speaking them</title>
 <meta name="description" content="Practice real conversations with AI tutors who adapt to your level, correct your mistakes, and help you build vocabulary through natural voice.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta property="og:title" content="Fonvo — Learn languages by actually speaking them">
+<meta property="og:description" content="Practice real conversations with AI tutors who adapt to your level. 10 languages, voice & text modes, instant feedback.">
+<meta property="og:image" content="assets/og-image.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fonvo — Learn languages by actually speaking them">
+<meta name="twitter:description" content="Practice real conversations with AI tutors who adapt to your level. 10 languages, voice & text modes, instant feedback.">
+<meta name="twitter:image" content="assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
@@ -114,7 +123,7 @@ body {
   gap: 10px;
   text-decoration: none;
 }
-.nav-logo svg { height: 44px; width: auto; }
+.nav-logo svg { height: 44px; width: auto; margin-left: -40px; }
 .footer-brand .nav-logo svg { height: 36px; }
 .nav-links {
   display: flex;
@@ -164,7 +173,7 @@ body {
 /* ========== HERO ========== */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 110vh;
   display: flex;
   align-items: center;
   padding-top: var(--nav-height);
@@ -223,7 +232,7 @@ body {
   align-items: center;
   position: relative;
   z-index: 2;
-  padding: 60px 0;
+  padding: 130px 0 150px;
 }
 .hero-content { max-width: 560px; }
 .hero-badge {
@@ -331,46 +340,55 @@ body {
   justify-content: center;
 }
 .phone-mockup {
-  width: 280px;
-  height: 580px;
-  background: var(--surface);
-  border-radius: 40px;
-  border: 3px solid #e0d8e8;
-  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(74, 33, 105, 0.04);
+  width: 300px;
+  height: 620px;
+  background: linear-gradient(145deg, #2d2240, #1a1025 30%, #1a1025 70%, #120e1a);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 44px;
+  padding: 6px;
   overflow: hidden;
   position: relative;
-  transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: perspective(800px) rotateY(-8deg) rotateX(3deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  box-shadow:
+    12px 8px 0 0 #0e0a14,
+    12px 8px 0 1px #1a1025,
+    20px 20px 40px rgba(0,0,0,0.35),
+    8px 8px 20px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
 }
 .phone-mockup:hover {
-  transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+  transform: perspective(800px) rotateY(0deg) rotateX(0deg);
 }
 .phone-notch {
   position: absolute;
-  top: 12px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90px;
-  height: 25px;
+  width: 86px;
+  height: 24px;
   background: #1a1025;
   border-radius: 20px;
-  z-index: 2;
+  z-index: 4;
 }
 .phone-home-bar {
   position: absolute;
-  bottom: 6px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
+  width: 96px;
   height: 4px;
   background: rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  z-index: 2;
+  z-index: 4;
 }
 .phone-screen {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: 38px;
+  position: relative;
 }
 .phone-screen img {
   width: 100%;
@@ -405,15 +423,16 @@ body {
 }
 .phone-glow {
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 140px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(155, 61, 150, 0.12), transparent 70%);
-  top: 50%;
+  background: radial-gradient(ellipse, rgba(26, 16, 37, 0.45), rgba(26, 16, 37, 0.15) 50%, transparent 80%);
+  bottom: -60px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   pointer-events: none;
   z-index: -1;
+  filter: blur(20px);
 }
 
 /* ========== STATS BAR ========== */
@@ -529,16 +548,19 @@ body {
   color: var(--text-secondary);
 }
 .feature-bullets li::before {
-  content: '';
+  content: '✓';
   width: 20px;
   height: 20px;
   min-width: 20px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(155, 61, 150, 0.1), rgba(255, 154, 35, 0.1));
+  background: linear-gradient(135deg, rgba(155, 61, 150, 0.12), rgba(255, 154, 35, 0.08));
   margin-top: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--magenta);
 }
 .feature-visual {
   position: relative;
@@ -670,9 +692,9 @@ body {
   position: relative;
   margin-top: 60px;
   max-width: 1100px;
-  height: 520px;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
 }
 .tutor-orb {
   position: absolute;
@@ -720,7 +742,7 @@ body {
 }
 .tutor-orb-phrase {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: var(--orb-phrase-size, 13px);
   font-weight: 600;
   font-style: italic;
   color: var(--text);
@@ -728,7 +750,7 @@ body {
   margin-bottom: 1px;
 }
 .tutor-orb-name {
-  font-size: 11px;
+  font-size: var(--orb-name-size, 11px);
   font-weight: 600;
   color: var(--text-secondary);
   line-height: 1.2;
@@ -991,13 +1013,135 @@ body {
   opacity: 0.7;
 }
 
+/* ========== SOCIAL PROOF ========== */
+.social-proof {
+  padding: 120px 0;
+}
+.social-proof-quotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.proof-quote {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+}
+.proof-quote:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.proof-quote p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.proof-quote strong { color: var(--text); }
+.proof-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.proof-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gradient);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.proof-author strong {
+  display: block;
+  font-size: 14px;
+  color: var(--text);
+}
+.proof-author span:not(.proof-avatar) {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ========== CTA ========== */
+.cta {
+  padding: 80px 0 120px;
+}
+.cta-inner {
+  text-align: center;
+  background: var(--gradient);
+  border-radius: var(--radius-xl);
+  padding: 80px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.cta-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.12), transparent 60%),
+              radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08), transparent 50%);
+  pointer-events: none;
+}
+.cta-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  position: relative;
+}
+.cta-inner p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.85);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+  position: relative;
+}
+.cta-actions {
+  position: relative;
+}
+.cta-actions .btn-primary {
+  background: white;
+  color: var(--purple);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.cta-actions .btn-primary:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  transform: translateY(-2px) scale(1.02);
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
-  .tutors-physics { height: 480px; }
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(255, 253, 248, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 16px 24px 24px;
+    gap: 8px;
+    box-shadow: 0 8px 32px rgba(74, 33, 105, 0.08);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.show { display: flex; }
+  .nav-links li { list-style: none; }
+  .nav-links a { display: block; padding: 12px 0; font-size: 16px; }
+  .nav-cta { text-align: center; margin-top: 8px; }
   .nav-mobile-toggle { display: block; }
   .hero-inner {
     grid-template-columns: 1fr;
@@ -1018,8 +1162,9 @@ body {
   .feature-screenshot { max-width: 240px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .steps-grid { grid-template-columns: 1fr; }
-  .tutors-physics { height: 600px; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .social-proof-quotes { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .cta-inner { padding: 60px 24px; }
   .footer-inner { flex-direction: column; gap: 32px; }
   .footer-links { gap: 24px; }
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
@@ -1063,10 +1208,6 @@ body {
   </div>
   <div class="container hero-inner">
     <div class="hero-content">
-      <div class="hero-badge reveal">
-        <span class="hero-badge-dot"></span>
-        iOS App Available
-      </div>
       <h1 class="reveal reveal-delay-1">Learn languages by <span class="animated-gradient">actually speaking them</span></h1>
       <p class="reveal reveal-delay-2">Practice real conversations with AI tutors who adapt to your level, correct your mistakes, and help you build vocabulary &mdash; all through natural voice.</p>
       <div class="hero-actions reveal reveal-delay-3">
@@ -1099,8 +1240,8 @@ body {
         <p>Languages</p>
       </div>
       <div class="stat-item reveal reveal-delay-1">
-        <h3><span class="counter" data-target="44">0</span></h3>
-        <p>Conversation Scenarios</p>
+        <h3><span class="counter" data-target="44" data-suffix="+">0</span></h3>
+        <p>Topics &amp; Scenarios</p>
       </div>
       <div class="stat-item reveal reveal-delay-2">
         <h3><span class="counter" data-target="6">0</span></h3>
@@ -1226,7 +1367,7 @@ body {
       <div class="step-card reveal reveal-delay-1">
         <div class="step-number">01</div>
         <h3>Pick a language</h3>
-        <p>Choose from Spanish, English, German, Polish, or French. Set your CEFR level from A1 (beginner) to C2 (native).</p>
+        <p>Choose from 10 languages — Spanish, English, German, French, Italian, and more. Set your CEFR level from A1 (beginner) to C2 (native).</p>
       </div>
       <div class="step-card reveal reveal-delay-2">
         <div class="step-number">02</div>
@@ -1279,7 +1420,7 @@ body {
           <li><span class="check yes">&#10003;</span> 3 conversations per day</li>
           <li><span class="check yes">&#10003;</span> Basic error analysis</li>
           <li><span class="check yes">&#10003;</span> Limited flashcards</li>
-          <li><span class="check yes">&#10003;</span> All 5 languages</li>
+          <li><span class="check yes">&#10003;</span> All 10 languages</li>
           <li><span class="check no">&mdash;</span> Realtime voice mode</li>
           <li><span class="check no">&mdash;</span> Pronunciation training</li>
           <li><span class="check no">&mdash;</span> Unlimited flashcards</li>
@@ -1309,6 +1450,62 @@ body {
   </div>
 </section>
 
+<!-- ===== SOCIAL PROOF ===== -->
+<section class="social-proof">
+  <div class="container">
+    <div class="social-proof-inner reveal">
+      <div class="social-proof-quotes">
+        <div class="proof-quote">
+          <p>"I've tried Duolingo, Babbel, and others — Fonvo is the first app where I actually <strong>speak</strong>. After 2 weeks I had a real conversation in Spanish."</p>
+          <div class="proof-author">
+            <span class="proof-avatar">M</span>
+            <div>
+              <strong>Marta K.</strong>
+              <span>Learning Spanish</span>
+            </div>
+          </div>
+        </div>
+        <div class="proof-quote">
+          <p>"The tutors feel surprisingly real. Luna corrected my conjugation mid-sentence and I didn't even feel judged. Game changer."</p>
+          <div class="proof-author">
+            <span class="proof-avatar">J</span>
+            <div>
+              <strong>James R.</strong>
+              <span>Learning German</span>
+            </div>
+          </div>
+        </div>
+        <div class="proof-quote">
+          <p>"Finally something beyond flashcards. The error analysis after each conversation shows me exactly what to work on."</p>
+          <div class="proof-author">
+            <span class="proof-avatar">A</span>
+            <div>
+              <strong>Anna L.</strong>
+              <span>Learning French</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>Ready to start speaking?</h2>
+      <p>Join learners practicing real conversations every day. Free to start, no credit card required.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download for iOS
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="container">
@@ -1317,7 +1514,7 @@ body {
         <a href="#" class="nav-logo">
           <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,0) scale(0.41)"><path d="m161.3 5h-44.31c-9.85 0-16.89 8.92-16.89 18.93v9.39h-3.16v-9.84c0-7.76 2.54-14.41 8.39-18.48h-12.7c-5 0-9 4-9 9v108c0 5 4 9 9 9h13.72c5 0 9-4 9-9v-28.04c0-1 0.59-1.64 1.38-1.64h28.33c5.17 0 6.86-5.3 6.86-7.63v-18.36c0-4.47-3.54-8.82-7.26-8.82h-27.56c-1.22 0-1.75-1.06-1.75-1.89v-13.53c0-1.43 1.06-2.41 2.28-2.41h4.88v12.78l15.02-12.78h23.67c5.16 0 7.32-4.32 7.32-6.87v-20.73c0-3.96-2.88-7.08-7.22-7.08zm-36.53 21.41c-3.08 0-4.28-2.48-4.28-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.23 1.85 4.23 4.21 0 2.06-1.62 4.04-3.94 4.04zm14.02 0c-2.62 0-4.12-2.32-4.12-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.14 1.85 4.14 4.21 0 2.06-1.86 4.04-4.01 4.04zm13.57 0c-2.62 0-3.59-2.32-3.59-3.77 0-2.36 1.52-4.48 3.83-4.48 2.76 0 3.41 2.12 3.41 4.21 0 2.06-1.5 4.04-3.65 4.04z" fill="url(#flc_icon)"/></g><g transform="translate(74,10)"><path d="m23.34 11h-12.84c-8.15 0-10.52 4.78-10.52 12.11v10.9c0 7.33 2.37 11.48 10.52 11.48h12.84c8.15 0 11.37-3.31 11.37-11.48v-10.9c0-7.33-3.22-12.11-11.37-12.11zm1.17 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/><path d="m64.43 10.6h-0.92c-5.16 0-8.99 2.03-12.16 4.21l-0.55-3.81h-9.32v34.49h10.09v-23.3c1.7-1.89 4.12-2.81 7.74-2.81 3.22 0 4.29 1.4 4.29 4.62v21.49h10.76v-23.79c0-6.72-3.56-11.1-9.93-11.1z" fill="url(#flc_text)"/><path d="m95.13 34.1-6.88-23.07h-12.01l13.91 34.49h11.73l11.96-34.49h-10.36l-8.35 23.07z" fill="url(#flc_text)"/><path d="m140.23 11h-12.84c-8.15 0-11 4.78-11 12.11v10.9c0 7.33 2.85 11.48 11 11.48h12.84c8.15 0 11.11-3.31 11.11-11.48v-10.9c0-7.33-2.96-12.11-11.11-12.11zm0.69 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/></g><defs><linearGradient id="flc_icon" x1="42.83" x2="151.6" y1="119.6" y2="10.89" gradientUnits="userSpaceOnUse"><stop stop-color="#4A2169" offset="0"/><stop stop-color="#9B3D96" offset=".48"/><stop stop-color="#FF9A23" offset="1"/></linearGradient><linearGradient id="flc_text" x1="0" x2="155" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#9B3D96" offset="0"/><stop stop-color="#FF9A23" offset="1"/></linearGradient></defs></svg>
         </a>
-        <p>Practice languages through real conversations with AI tutors. Made with care. No tracking. No ads.</p>
+        <p>The language app that actually listens.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
@@ -1328,9 +1525,9 @@ body {
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Contact</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="mailto:contact@fonvo.app">Contact</a>
         </div>
       </div>
     </div>
@@ -1354,29 +1551,46 @@ body {
   const container = document.getElementById('tutorsPhysics');
   if (!container) return;
 
-  const W = Math.min(container.offsetWidth || 900, 1100);
-  const H = 520;
-  const EXPAND = 30;
-
+  const BASE_W = 1100;
   const nodes = [
-    { name: 'Luna', lang: 'Spanish', phrase: '¡Hola! Soy Luna', flag: '🇪🇸', img: 'assets/avatars/luna_spanish.png', color: '#F5A623', r: 75 },
-    { name: 'Alfie', lang: 'English', phrase: "Hey! I'm Alfie", flag: '🇬🇧', img: 'assets/avatars/alfie_english.png', color: '#4A90D9', r: 70 },
-    { name: 'Elsa', lang: 'German', phrase: 'Hallo! Ich bin Elsa', flag: '🇩🇪', img: 'assets/avatars/elsa_german.png', color: '#6B7B8D', r: 68 },
-    { name: 'Kasia', lang: 'Polish', phrase: 'Cześć! Jestem Kasia', flag: '🇵🇱', img: 'assets/avatars/kasia_polish.png', color: '#E8839B', r: 72 },
-    { name: 'Émile', lang: 'French', phrase: 'Bonjour ! Je suis Émile', flag: '🇫🇷', img: 'assets/avatars/émile_french.png', color: '#5BA67A', r: 66 },
-    { name: 'Sofia', lang: 'Italian', phrase: 'Ciao! Sono Sofia', flag: '🇮🇹', img: 'assets/avatars/sofia_italian.png', color: '#E07B4B', r: 73 },
-    { name: 'Mateo', lang: 'Portuguese', phrase: 'Olá! Eu sou Mateo', flag: '🇧🇷', img: 'assets/avatars/mateo_portuguese.png', color: '#3A9E5C', r: 69 },
-    { name: 'Yuki', lang: 'Japanese', phrase: 'こんにちは！ユキです', flag: '🇯🇵', img: 'assets/avatars/yuki_japanese.png', color: '#C44569', r: 74 },
-    { name: 'Mina', lang: 'Korean', phrase: '안녕하세요! 미나예요', flag: '🇰🇷', img: 'assets/avatars/mina_korean.png', color: '#6C5CE7', r: 67 },
-    { name: 'Wei', lang: 'Chinese', phrase: '你好！我是小威', flag: '🇨🇳', img: 'assets/avatars/wei_chinese.png', color: '#D63031', r: 71 },
+    { name: 'Luna', lang: 'Spanish', phrase: '¡Hola! Soy Luna', flag: '🇪🇸', img: 'assets/avatars/luna_spanish.png', color: '#F5A623', baseR: 75 },
+    { name: 'Alfie', lang: 'English', phrase: "Hey! I'm Alfie", flag: '🇬🇧', img: 'assets/avatars/alfie_english.png', color: '#4A90D9', baseR: 70 },
+    { name: 'Elsa', lang: 'German', phrase: 'Hallo! Ich bin Elsa', flag: '🇩🇪', img: 'assets/avatars/elsa_german.png', color: '#6B7B8D', baseR: 68 },
+    { name: 'Kasia', lang: 'Polish', phrase: 'Cześć! Jestem Kasia', flag: '🇵🇱', img: 'assets/avatars/kasia_polish.png', color: '#E8839B', baseR: 72 },
+    { name: 'Émile', lang: 'French', phrase: 'Bonjour ! Je suis Émile', flag: '🇫🇷', img: 'assets/avatars/émile_french.png', color: '#5BA67A', baseR: 66 },
+    { name: 'Sofia', lang: 'Italian', phrase: 'Ciao! Sono Sofia', flag: '🇮🇹', img: 'assets/avatars/sofia_italian.png', color: '#E07B4B', baseR: 73 },
+    { name: 'Mateo', lang: 'Portuguese', phrase: 'Olá! Eu sou Mateo', flag: '🇧🇷', img: 'assets/avatars/mateo_portuguese.png', color: '#3A9E5C', baseR: 69 },
+    { name: 'Yuki', lang: 'Japanese', phrase: 'こんにちは！ユキです', flag: '🇯🇵', img: 'assets/avatars/yuki_japanese.png', color: '#C44569', baseR: 74 },
+    { name: 'Mina', lang: 'Korean', phrase: '안녕하세요! 미나예요', flag: '🇰🇷', img: 'assets/avatars/mina_korean.png', color: '#6C5CE7', baseR: 67 },
+    { name: 'Wei', lang: 'Chinese', phrase: '你好！我是小威', flag: '🇨🇳', img: 'assets/avatars/wei_chinese.png', color: '#D63031', baseR: 71 },
   ];
 
-  // Init positions scattered
+  function getScale() { return Math.max(0.45, Math.min(1, container.offsetWidth / BASE_W)); }
+  function getDimensions() {
+    const sc = getScale();
+    // On narrow screens use more vertical space with rows layout
+    const rows = container.offsetWidth < 500 ? 3 : 2;
+    const H = Math.max(350, Math.round((rows === 3 ? 700 : 520) * sc));
+    return { W: container.offsetWidth, H, sc, EXPAND: Math.round(30 * sc) };
+  }
+
+  let { W, H, sc, EXPAND } = getDimensions();
+  container.style.height = H + 'px';
+
+  // Apply scale to radii and set initial positions
   nodes.forEach((n, i) => {
-    n.x = (W / (nodes.length + 1)) * (i + 1) + (Math.random() - 0.5) * 80;
-    n.y = H / 2 + (Math.random() - 0.5) * 100;
+    n.r = Math.round(n.baseR * sc);
+    n.x = (W / (nodes.length + 1)) * (i + 1) + (Math.random() - 0.5) * 40 * sc;
+    n.y = H / 2 + (Math.random() - 0.5) * 80 * sc;
     n.currentR = n.r;
   });
+
+  // Set CSS custom properties for font scaling
+  function updateFontScale(scale) {
+    container.style.setProperty('--orb-phrase-size', Math.round(13 * scale) + 'px');
+    container.style.setProperty('--orb-name-size', Math.round(11 * scale) + 'px');
+  }
+  updateFontScale(sc);
 
   // Build DOM
   const orbs = nodes.map(n => {
@@ -1397,7 +1611,6 @@ body {
     .force('x', d3.forceX(W / 2).strength(0.02))
     .force('y', d3.forceY(H / 2).strength(0.04))
     .force('bounds', function() {
-      // Custom force to keep nodes inside bounds
       for (const n of nodes) {
         const r = n.currentR;
         if (n.x - r < 0) { n.x = r; n.vx = Math.abs(n.vx || 0) * 0.5; }
@@ -1411,26 +1624,23 @@ body {
     .on('tick', () => {
       tickTweens();
       nodes.forEach((n, i) => {
-        const s = n.currentR * 2;
+        const sz = n.currentR * 2;
         orbs[i].style.transform = `translate(${n.x - n.currentR}px, ${n.y - n.currentR}px)`;
-        orbs[i].style.width = s + 'px';
-        orbs[i].style.height = s + 'px';
+        orbs[i].style.width = sz + 'px';
+        orbs[i].style.height = sz + 'px';
       });
     });
 
   // Animated radius transitions
   const tweens = new Map();
   function animateRadius(node, targetR) {
-    const startR = node.currentR;
-    const startTime = performance.now();
-    const duration = 350;
-    tweens.set(node, { startR, targetR, startTime, duration });
+    tweens.set(node, { startR: node.currentR, targetR, startTime: performance.now(), duration: 350 });
   }
   function tickTweens() {
     const now = performance.now();
     for (const [node, tw] of tweens) {
       const t = Math.min((now - tw.startTime) / tw.duration, 1);
-      const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
+      const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       node.currentR = tw.startR + (tw.targetR - tw.startR) * ease;
       if (t >= 1) tweens.delete(node);
     }
@@ -1440,7 +1650,7 @@ body {
     }
   }
 
-  // Hover — expand radius, simulation handles pushing
+  // Hover — expand radius
   let hoveredIdx = -1;
   function setHovered(idx) {
     if (idx === hoveredIdx) return;
@@ -1457,32 +1667,60 @@ body {
     simulation.alpha(0.5).restart();
   }
 
-  container.addEventListener('mousemove', (e) => {
-    const rect = container.getBoundingClientRect();
-    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-    let found = -1;
+  function findNodeAt(mx, my) {
     for (let i = nodes.length - 1; i >= 0; i--) {
       const dx = nodes[i].x - mx, dy = nodes[i].y - my;
-      if (dx * dx + dy * dy < nodes[i].currentR * nodes[i].currentR) { found = i; break; }
+      if (dx * dx + dy * dy < nodes[i].currentR * nodes[i].currentR) return i;
     }
-    setHovered(found);
+    return -1;
+  }
+
+  // Mouse events
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    setHovered(findNodeAt(e.clientX - rect.left, e.clientY - rect.top));
   });
   container.addEventListener('mouseleave', () => setHovered(-1));
 
-  // Drag
-  let dragNode = null, dragOffsetX = 0, dragOffsetY = 0;
+  // Touch events
+  container.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const rect = container.getBoundingClientRect();
+    const idx = findNodeAt(touch.clientX - rect.left, touch.clientY - rect.top);
+    if (idx >= 0) {
+      e.preventDefault();
+      setHovered(idx);
+      // Start drag
+      dragNode = nodes[idx];
+      dragNode.fx = dragNode.x;
+      dragNode.fy = dragNode.y;
+      simulation.alphaTarget(0.3).restart();
+    }
+  }, { passive: false });
+  container.addEventListener('touchmove', (e) => {
+    if (!dragNode) return;
+    e.preventDefault();
+    const touch = e.touches[0];
+    const rect = container.getBoundingClientRect();
+    dragNode.fx = touch.clientX - rect.left;
+    dragNode.fy = touch.clientY - rect.top;
+  }, { passive: false });
+  container.addEventListener('touchend', () => {
+    stopDrag();
+    // Keep hovered for a moment on touch, then clear
+    setTimeout(() => setHovered(-1), 1500);
+  });
+
+  // Mouse drag
+  let dragNode = null;
   container.addEventListener('mousedown', (e) => {
     const rect = container.getBoundingClientRect();
-    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-    for (let i = nodes.length - 1; i >= 0; i--) {
-      const dx = nodes[i].x - mx, dy = nodes[i].y - my;
-      if (dx * dx + dy * dy < nodes[i].currentR * nodes[i].currentR) {
-        dragNode = nodes[i];
-        dragNode.fx = dragNode.x;
-        dragNode.fy = dragNode.y;
-        simulation.alphaTarget(0.3).restart();
-        break;
-      }
+    const idx = findNodeAt(e.clientX - rect.left, e.clientY - rect.top);
+    if (idx >= 0) {
+      dragNode = nodes[idx];
+      dragNode.fx = dragNode.x;
+      dragNode.fy = dragNode.y;
+      simulation.alphaTarget(0.3).restart();
     }
   });
   container.addEventListener('mousemove', (e) => {
@@ -1500,6 +1738,38 @@ body {
   }
   container.addEventListener('mouseup', stopDrag);
   container.addEventListener('mouseleave', stopDrag);
+
+  // Resize handler
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const prev = { W, H, sc };
+      ({ W, H, sc, EXPAND } = getDimensions());
+      container.style.height = H + 'px';
+      updateFontScale(sc);
+
+      // Rescale radii and reposition proportionally
+      nodes.forEach(n => {
+        n.r = Math.round(n.baseR * sc);
+        if (hoveredIdx >= 0 && nodes[hoveredIdx] === n) {
+          n.currentR = n.r + EXPAND;
+        } else {
+          n.currentR = n.r;
+        }
+        // Scale positions proportionally to new dimensions
+        n.x = (n.x / prev.W) * W;
+        n.y = (n.y / prev.H) * H;
+      });
+
+      // Update simulation forces for new dimensions
+      simulation.force('center', d3.forceCenter(W / 2, H / 2).strength(0.05));
+      simulation.force('x', d3.forceX(W / 2).strength(0.02));
+      simulation.force('y', d3.forceY(H / 2).strength(0.04));
+      simulation.force('collide', d3.forceCollide().radius(collideRadius).strength(0.8).iterations(3));
+      simulation.alpha(0.8).restart();
+    }, 150);
+  });
 })()
 
 // ===== Scroll Reveal =====
@@ -1530,14 +1800,26 @@ hero.addEventListener('mousemove', (e) => {
 
 // ===== Phone parallax tilt =====
 const phone = document.getElementById('heroPhone');
+function updatePhone3D(rx, ry) {
+  const depth = 10;
+  const sx = Math.round(rx * depth);
+  const sy = Math.round(ry * depth * 0.6);
+  phone.style.transform = `perspective(800px) rotateY(${rx * -24}deg) rotateX(${ry * 16}deg)`;
+  phone.style.boxShadow = `
+    ${sx}px ${sy + 4}px 0 0 #0e0a14,
+    ${sx}px ${sy + 4}px 0 1px #1a1025,
+    ${sx * 2}px ${sy * 2 + 16}px 40px rgba(0,0,0,0.35),
+    ${sx}px ${sy + 8}px 20px rgba(0,0,0,0.2)`;
+}
+updatePhone3D(0.45, -0.15);
 hero.addEventListener('mousemove', (e) => {
   const rect = hero.getBoundingClientRect();
   const x = (e.clientX - rect.left) / rect.width - 0.5;
   const y = (e.clientY - rect.top) / rect.height - 0.5;
-  phone.style.transform = `perspective(1000px) rotateY(${x * -8}deg) rotateX(${y * 5}deg)`;
+  updatePhone3D(x, y);
 });
 hero.addEventListener('mouseleave', () => {
-  phone.style.transform = 'perspective(1000px) rotateY(-5deg) rotateX(2deg)';
+  updatePhone3D(0.45, -0.15);
 });
 
 // ===== Counter animation =====
@@ -1546,17 +1828,20 @@ const counterObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       const el = entry.target;
       const target = parseInt(el.dataset.target);
-      let current = 0;
+      const suffix = el.dataset.suffix || '';
       const duration = 1500;
-      const step = Math.max(1, Math.floor(target / (duration / 30)));
+      const totalSteps = Math.max(target, 30);
+      const interval = duration / totalSteps;
+      let current = 0;
+      const step = Math.max(1, Math.ceil(target / totalSteps));
       const timer = setInterval(() => {
         current += step;
         if (current >= target) {
           current = target;
           clearInterval(timer);
         }
-        el.textContent = current;
-      }, 30);
+        el.textContent = current + suffix;
+      }, interval);
       counterObserver.unobserve(el);
     }
   });
