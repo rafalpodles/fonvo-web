@@ -67,7 +67,9 @@ body {
 /* ========== UTILITY ========== */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .gradient-text {
-  background: var(--gradient-text);
+  background: linear-gradient(135deg, var(--amber), var(--magenta) 50%, var(--purple));
+  background-size: 300% 300%;
+  background-position: var(--grad-x, 50%) var(--grad-y, 50%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -492,7 +494,17 @@ body {
 }
 
 /* ========== FEATURES (Bento Grid) ========== */
-.features { padding: 120px 0; }
+.features { padding: 120px 0; position: relative; overflow: hidden; }
+.features-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155, 61, 150, 0.07), rgba(255, 154, 35, 0.03) 40%, transparent 65%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 0.4s ease-out, top 0.4s ease-out;
+  z-index: 0;
+}
 .section-header {
   text-align: center;
   max-width: 600px;
@@ -580,7 +592,7 @@ body {
   z-index: -1;
 }
 
-/* Inner bento card */
+/* Inner card */
 .b {
   position: relative;
   z-index: 1;
@@ -590,18 +602,19 @@ body {
   border: 1px solid var(--border);
   height: 100%;
 }
-/* Cards with peek screenshots need overflow visible */
+/* Cards with peek screenshots need overflow visible up the chain */
 .b--errors, .b--vocab, .b--scenarios, .b--level, .b--progress, .b--pronunciation {
   overflow: visible;
-  background: transparent;
-}
-.b--errors .b-body, .b--vocab .b-body, .b--scenarios .b-body,
-.b--level .b-body, .b--progress .b-body, .b--pronunciation .b-body {
-  background: var(--surface);
-  border-radius: 0 0 18px 18px;
 }
 .glow-card:has(.b-thumb-peek) {
   overflow: visible;
+}
+.b-thumb-peek {
+  clip-path: inset(0 0 0 0 round 18px 18px 0 0);
+  transition: clip-path 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glow-card:hover .b-thumb-peek {
+  clip-path: inset(-300px -20px 0 -20px);
 }
 .b-body { padding: 22px; }
 .b h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; color: var(--text); }
@@ -631,7 +644,7 @@ body {
 .b--voice h3 { font-size: 24px; color: white; }
 .b--voice p { color: rgba(255,255,255,0.7); }
 
-/* Peek phone thumbnails */
+/* Screenshot cards with hover slide-up */
 .b-thumb-peek {
   height: 140px;
   display: flex;
@@ -639,11 +652,6 @@ body {
   justify-content: center;
   position: relative;
   overflow: visible;
-  clip-path: inset(0 0 0 0 round 18px 18px 0 0);
-  transition: clip-path 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.glow-card:hover .b-thumb-peek {
-  clip-path: inset(-300px -20px 0 -20px);
 }
 .b-thumb-peek .phone-mini {
   max-width: 160px;
@@ -657,15 +665,56 @@ body {
   transform: translateY(0%);
   box-shadow: 0 20px 50px rgba(0,0,0,0.18);
 }
-/* Peek card backgrounds — no ::after glows (they leak with overflow:visible) */
-.b-thumb-peek.errors-bg { background: linear-gradient(135deg, rgba(255,107,107,0.06), rgba(155,61,150,0.04)); }
-.b-thumb-peek.vocab-bg { background: linear-gradient(135deg, rgba(255,154,35,0.05), rgba(255,154,35,0.02)); }
-.b-thumb-peek.scenarios-bg { background: linear-gradient(135deg, rgba(255,154,35,0.06), rgba(255,154,35,0.02)); }
-.b-thumb-peek.level-bg { background: linear-gradient(135deg, rgba(74,144,217,0.06), rgba(74,144,217,0.02)); }
-.b-thumb-peek.progress-bg { background: linear-gradient(135deg, rgba(78,205,196,0.06), rgba(78,205,196,0.02)); }
-.b-thumb-peek.pronunciation-bg { background: linear-gradient(135deg, rgba(155,61,150,0.06), rgba(74,33,105,0.03)); }
 
-/* Tag colors per card */
+.b-thumb-peek.errors-bg {
+  background: linear-gradient(135deg, rgba(255,107,107,0.06), rgba(155,61,150,0.04));
+}
+.b-thumb-peek.vocab-bg {
+  background: linear-gradient(135deg, rgba(255,154,35,0.05), rgba(255,154,35,0.02));
+}
+.b-thumb-peek::after {
+  content: ''; position: absolute;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+}
+.b-thumb-peek.errors-bg::after {
+  right: -30px; top: -30px;
+  background: radial-gradient(circle, rgba(255,107,107,0.12), transparent 70%);
+}
+.b-thumb-peek.vocab-bg::after {
+  left: -30px; bottom: -30px;
+  background: radial-gradient(circle, rgba(255,154,35,0.1), transparent 70%);
+}
+.b-thumb-peek.scenarios-bg {
+  background: linear-gradient(135deg, rgba(255,154,35,0.06), rgba(255,154,35,0.02));
+}
+.b-thumb-peek.scenarios-bg::after {
+  right: -20px; bottom: -20px;
+  background: radial-gradient(circle, rgba(255,154,35,0.1), transparent 70%);
+}
+.b-thumb-peek.level-bg {
+  background: linear-gradient(135deg, rgba(74,144,217,0.06), rgba(74,144,217,0.02));
+}
+.b-thumb-peek.level-bg::after {
+  left: -20px; top: -20px;
+  background: radial-gradient(circle, rgba(74,144,217,0.1), transparent 70%);
+}
+.b-thumb-peek.progress-bg {
+  background: linear-gradient(135deg, rgba(78,205,196,0.06), rgba(78,205,196,0.02));
+}
+.b-thumb-peek.progress-bg::after {
+  right: -20px; top: -20px;
+  background: radial-gradient(circle, rgba(78,205,196,0.1), transparent 70%);
+}
+.b-thumb-peek.pronunciation-bg {
+  background: linear-gradient(135deg, rgba(155,61,150,0.06), rgba(74,33,105,0.03));
+}
+.b-thumb-peek.pronunciation-bg::after {
+  left: -20px; bottom: -20px;
+  background: radial-gradient(circle, rgba(155,61,150,0.1), transparent 70%);
+}
+
+/* Tag colors */
 .b--errors .tag { background: rgba(255,107,107,0.12); color: var(--coral); }
 .b--vocab .tag { background: rgba(255,154,35,0.12); color: var(--amber); }
 .b--scenarios .tag { background: rgba(255,154,35,0.12); color: var(--amber); }
@@ -1331,6 +1380,7 @@ body {
 
 <!-- ===== FEATURES ===== -->
 <section class="features" id="features">
+  <div class="features-glow" id="featuresGlow"></div>
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label" data-i18n="features.eyebrow">Why Fonvo</span>
@@ -1943,6 +1993,15 @@ hero.addEventListener('mouseleave', () => {
   updatePhone3D(0.45, -0.15);
 });
 
+// ===== Features section glow =====
+const featuresSection = document.getElementById('features');
+const featuresGlow = document.getElementById('featuresGlow');
+featuresSection.addEventListener('mousemove', (e) => {
+  const rect = featuresSection.getBoundingClientRect();
+  featuresGlow.style.left = (e.clientX - rect.left) + 'px';
+  featuresGlow.style.top = (e.clientY - rect.top) + 'px';
+});
+
 // ===== Counter animation =====
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -2002,6 +2061,17 @@ document.addEventListener('pointermove', (e) => {
 
 document.addEventListener('pointerleave', () => {
   glowCards.forEach(card => card.style.setProperty('--glow-active', '0'));
+});
+
+// ===== Gradient text follows mouse (page-wide, subtle) =====
+const gradTexts = document.querySelectorAll('.gradient-text');
+document.addEventListener('pointermove', (e) => {
+  const x = (e.clientX / window.innerWidth * 100).toFixed(1);
+  const y = ((e.clientY + window.scrollY) / document.documentElement.scrollHeight * 100).toFixed(1);
+  gradTexts.forEach(el => {
+    el.style.setProperty('--grad-x', x + '%');
+    el.style.setProperty('--grad-y', y + '%');
+  });
 });
 
 
