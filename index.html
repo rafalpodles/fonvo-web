@@ -153,6 +153,34 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 4px 20px rgba(155, 61, 150, 0.3);
 }
+/* Language picker */
+.lang-picker { position: relative; }
+.lang-picker-toggle {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 12px; cursor: pointer;
+  font-family: var(--font-body); font-size: 0.85rem;
+  color: var(--text-secondary); transition: all 0.2s;
+}
+.lang-picker-toggle:hover { border-color: var(--magenta); color: var(--text); }
+.lang-picker-icon { display: flex; align-items: center; }
+.lang-picker-label { white-space: nowrap; }
+.lang-dropdown {
+  display: none; flex-direction: column;
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow-md);
+  max-height: 320px; overflow-y: auto; z-index: 1000;
+  min-width: 180px; padding: 4px;
+}
+.lang-option {
+  background: none; border: none; padding: 8px 14px;
+  text-align: left; cursor: pointer; font-family: var(--font-body);
+  font-size: 0.85rem; color: var(--text-secondary);
+  border-radius: 8px; transition: all 0.15s;
+}
+.lang-option:hover { background: var(--surface-warm); color: var(--text); }
+.lang-option.active { color: var(--magenta); font-weight: 600; background: rgba(155, 61, 150, 0.05); }
 .nav-mobile-toggle {
   display: none;
   background: none;
@@ -1231,11 +1259,12 @@ body {
       <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,0) scale(0.41)"><path d="m161.3 5h-44.31c-9.85 0-16.89 8.92-16.89 18.93v9.39h-3.16v-9.84c0-7.76 2.54-14.41 8.39-18.48h-12.7c-5 0-9 4-9 9v108c0 5 4 9 9 9h13.72c5 0 9-4 9-9v-28.04c0-1 0.59-1.64 1.38-1.64h28.33c5.17 0 6.86-5.3 6.86-7.63v-18.36c0-4.47-3.54-8.82-7.26-8.82h-27.56c-1.22 0-1.75-1.06-1.75-1.89v-13.53c0-1.43 1.06-2.41 2.28-2.41h4.88v12.78l15.02-12.78h23.67c5.16 0 7.32-4.32 7.32-6.87v-20.73c0-3.96-2.88-7.08-7.22-7.08zm-36.53 21.41c-3.08 0-4.28-2.48-4.28-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.23 1.85 4.23 4.21 0 2.06-1.62 4.04-3.94 4.04zm14.02 0c-2.62 0-4.12-2.32-4.12-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.14 1.85 4.14 4.21 0 2.06-1.86 4.04-4.01 4.04zm13.57 0c-2.62 0-3.59-2.32-3.59-3.77 0-2.36 1.52-4.48 3.83-4.48 2.76 0 3.41 2.12 3.41 4.21 0 2.06-1.5 4.04-3.65 4.04z" fill="url(#nlc_icon)"/></g><g transform="translate(74,10)"><path d="m23.34 11h-12.84c-8.15 0-10.52 4.78-10.52 12.11v10.9c0 7.33 2.37 11.48 10.52 11.48h12.84c8.15 0 11.37-3.31 11.37-11.48v-10.9c0-7.33-3.22-12.11-11.37-12.11zm1.17 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#nlc_text)"/><path d="m64.43 10.6h-0.92c-5.16 0-8.99 2.03-12.16 4.21l-0.55-3.81h-9.32v34.49h10.09v-23.3c1.7-1.89 4.12-2.81 7.74-2.81 3.22 0 4.29 1.4 4.29 4.62v21.49h10.76v-23.79c0-6.72-3.56-11.1-9.93-11.1z" fill="url(#nlc_text)"/><path d="m95.13 34.1-6.88-23.07h-12.01l13.91 34.49h11.73l11.96-34.49h-10.36l-8.35 23.07z" fill="url(#nlc_text)"/><path d="m140.23 11h-12.84c-8.15 0-11 4.78-11 12.11v10.9c0 7.33 2.85 11.48 11 11.48h12.84c8.15 0 11.11-3.31 11.11-11.48v-10.9c0-7.33-2.96-12.11-11.11-12.11zm0.69 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#nlc_text)"/></g><defs><linearGradient id="nlc_icon" x1="42.83" x2="151.6" y1="119.6" y2="10.89" gradientUnits="userSpaceOnUse"><stop stop-color="#4A2169" offset="0"/><stop stop-color="#9B3D96" offset=".48"/><stop stop-color="#FF9A23" offset="1"/></linearGradient><linearGradient id="nlc_text" x1="0" x2="155" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#9B3D96" offset="0"/><stop stop-color="#FF9A23" offset="1"/></linearGradient></defs></svg>
     </a>
     <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#how-it-works">How it works</a></li>
-      <li><a href="#tutors">Tutors</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#" class="nav-cta">Download</a></li>
+      <li><a href="#tutors" data-i18n="nav.tutors">Tutors</a></li>
+      <li><a href="#features" data-i18n="nav.features">Features</a></li>
+      <li><a href="#how-it-works" data-i18n="nav.howItWorks">How it works</a></li>
+      <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+      <li><a href="#" class="nav-cta" data-i18n="nav.download">Download</a></li>
+      <li id="langPicker" class="lang-picker"></li>
     </ul>
     <button class="nav-mobile-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
       <span></span><span></span><span></span>
@@ -1253,14 +1282,14 @@ body {
   </div>
   <div class="container hero-inner">
     <div class="hero-content">
-      <h1 class="reveal reveal-delay-1">Learn languages by <span class="animated-gradient">actually speaking them</span></h1>
-      <p class="reveal reveal-delay-2">Practice real conversations with AI tutors who adapt to your level, correct your mistakes, and help you build vocabulary &mdash; all through natural voice.</p>
+      <h1 class="reveal reveal-delay-1" data-i18n="hero.title">Learn languages by <span class="animated-gradient">actually speaking them</span></h1>
+      <p class="reveal reveal-delay-2" data-i18n="hero.subtitle">Practice real conversations with AI tutors who adapt to your level, correct your mistakes, and help you build vocabulary &mdash; all through natural voice.</p>
       <div class="hero-actions reveal reveal-delay-3">
         <a href="#" class="btn-primary">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          Download for iOS
+          <span data-i18n="hero.cta">Download for iOS</span>
         </a>
-        <a href="#features" class="btn-secondary">See how it works</a>
+        <a href="#features" class="btn-secondary" data-i18n="hero.secondary">See how it works</a>
       </div>
     </div>
     <div class="hero-phone reveal reveal-delay-2">
@@ -1282,19 +1311,19 @@ body {
     <div class="stats-grid">
       <div class="stat-item reveal">
         <h3><span class="counter" data-target="10">0</span></h3>
-        <p>Languages</p>
+        <p data-i18n="stats.languages">Languages</p>
       </div>
       <div class="stat-item reveal reveal-delay-1">
         <h3><span class="counter" data-target="44" data-suffix="+">0</span></h3>
-        <p>Topics &amp; Scenarios</p>
+        <p data-i18n="stats.scenarios">Topics &amp; Scenarios</p>
       </div>
       <div class="stat-item reveal reveal-delay-2">
         <h3><span class="counter" data-target="6">0</span></h3>
-        <p>CEFR Levels</p>
+        <p data-i18n="stats.levels">CEFR Levels</p>
       </div>
       <div class="stat-item reveal reveal-delay-3">
         <h3><span class="counter" data-target="3">0</span></h3>
-        <p>Conversation Modes</p>
+        <p data-i18n="stats.modes">Conversation Modes</p>
       </div>
     </div>
   </div>
@@ -1304,9 +1333,9 @@ body {
 <section class="tutors" id="tutors">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">Meet Your Tutors</span>
-      <h2>10 characters, <span class="gradient-text">10 languages</span></h2>
-      <p>Each tutor brings their own warmth, style, and teaching approach. Hover to hear them speak!</p>
+      <span class="section-label" data-i18n="tutors.title">Meet Your Tutors</span>
+      <h2 data-i18n="tutors.subtitle">10 characters, <span class="gradient-text">10 languages</span></h2>
+      <p data-i18n="tutors.description">Each tutor brings their own warmth, style, and teaching approach. Hover to hear them speak!</p>
     </div>
     <div class="tutors-physics" id="tutorsPhysics"></div>
   </div>
@@ -1316,9 +1345,9 @@ body {
 <section class="features" id="features">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">Why Fonvo</span>
-      <h2>Everything you need to <span class="gradient-text">actually improve</span></h2>
-      <p>Not just a chatbot. A complete learning system that turns every conversation into progress.</p>
+      <span class="section-label" data-i18n="features.eyebrow">Why Fonvo</span>
+      <h2 data-i18n="features.title">Everything you need to <span class="gradient-text">actually improve</span></h2>
+      <p data-i18n="features.subtitle">Not just a chatbot. A complete learning system that turns every conversation into progress.</p>
     </div>
 
     <div class="bento-grid">
@@ -1330,9 +1359,9 @@ body {
             <div class="phone-mini"><img src="assets/screenshots/voice-conversation-spanish.jpg" alt="Voice conversation"></div>
           </div>
           <div class="b-body">
-            <span class="tag">Core Feature</span>
-            <h3>Talk Like You Mean It</h3>
-            <p>Just speak. Your tutor responds instantly — no buttons, no pauses. Like talking to a real person.</p>
+            <span class="tag" data-i18n="features.voice.tag">Core Feature</span>
+            <h3 data-i18n="features.voice.title">Talk Like You Mean It</h3>
+            <p data-i18n="features.voice.desc">Just speak. Your tutor responds instantly — no buttons, no pauses. Like talking to a real person.</p>
           </div>
         </div>
       </div>
@@ -1344,13 +1373,13 @@ body {
             <div class="phone-mini"><img src="assets/screenshots/transcript-error-review.jpg" alt="Error analysis"></div>
           </div>
           <div class="b-body">
-            <span class="tag">Smart Feedback</span>
-            <h3>See Every Mistake</h3>
-            <p>Every error highlighted, explained, and corrected after each conversation.</p>
+            <span class="tag" data-i18n="features.errors.tag">Smart Feedback</span>
+            <h3 data-i18n="features.errors.title">See Every Mistake</h3>
+            <p data-i18n="features.errors.desc">Every error highlighted, explained, and corrected after each conversation.</p>
             <div class="error-dots">
-              <span class="dot-label"><span class="dot" style="background:var(--coral)"></span>Grammar</span>
-              <span class="dot-label"><span class="dot" style="background:var(--amber)"></span>Vocabulary</span>
-              <span class="dot-label"><span class="dot" style="background:#4A90D9"></span>Structure</span>
+              <span class="dot-label"><span class="dot" style="background:var(--coral)"></span data-i18n="features.errors.grammar">Grammar</span>
+              <span class="dot-label"><span class="dot" style="background:var(--amber)"></span data-i18n="features.errors.vocabulary">Vocabulary</span>
+              <span class="dot-label"><span class="dot" style="background:#4A90D9"></span data-i18n="features.errors.structure">Structure</span>
             </div>
           </div>
         </div>
@@ -1363,9 +1392,9 @@ body {
             <div class="phone-mini"><img src="assets/screenshots/vocabulary-list.jpg" alt="Vocabulary list"></div>
           </div>
           <div class="b-body">
-            <span class="tag">Remember Everything</span>
-            <h3>Words That Stick</h3>
-            <p>New words saved automatically. Smart flashcards bring them back at the perfect time.</p>
+            <span class="tag" data-i18n="features.vocab.tag">Remember Everything</span>
+            <h3 data-i18n="features.vocab.title">Words That Stick</h3>
+            <p data-i18n="features.vocab.desc">New words saved automatically. Smart flashcards bring them back at the perfect time.</p>
           </div>
         </div>
       </div>
@@ -1377,8 +1406,8 @@ body {
             <div class="phone-mini"><img src="assets/screenshots/conversation-topics.jpg" alt="Conversation topics"></div>
           </div>
           <div class="b-body">
-            <span class="tag">Real Practice</span>
-            <h3>44+ Real Scenarios</h3>
+            <span class="tag" data-i18n="features.scenarios.tag">Real Practice</span>
+            <h3 data-i18n="features.scenarios.title">44+ Real Scenarios</h3>
             <p>Café, job interview, airport, hotel — or just chat freely. Your tutor adapts to any topic.</p>
           </div>
         </div>
@@ -1391,9 +1420,9 @@ body {
             <div class="phone-mini"><img src="assets/screenshots/settings-level-select.jpg" alt="Level selection"></div>
           </div>
           <div class="b-body">
-            <span class="tag">Personalized</span>
-            <h3>Adapts to Your Level</h3>
-            <p>From total beginner to near-native. Vocabulary and complexity adjust as you improve.</p>
+            <span class="tag" data-i18n="features.level.tag">Personalized</span>
+            <h3 data-i18n="features.level.title">Adapts to Your Level</h3>
+            <p data-i18n="features.level.desc">From total beginner to near-native. Vocabulary and complexity adjust as you improve.</p>
           </div>
         </div>
       </div>
@@ -1405,8 +1434,8 @@ body {
             <div class="phone-mini"><img src="assets/screenshots/progress-dashboard.jpg" alt="Progress dashboard"></div>
           </div>
           <div class="b-body">
-            <span class="tag">Insights</span>
-            <h3>Track Your Progress</h3>
+            <span class="tag" data-i18n="features.progress.tag">Insights</span>
+            <h3 data-i18n="features.progress.title">Track Your Progress</h3>
             <p>Charts, streaks, and scores — see how far you've come and what still needs work.</p>
           </div>
         </div>
@@ -1419,9 +1448,9 @@ body {
             <div class="phone-mini"><img src="assets/screenshots/text-chat-english.jpg" alt="Pronunciation practice"></div>
           </div>
           <div class="b-body">
-            <span class="tag">Accent Coach</span>
-            <h3>Pronunciation Training</h3>
-            <p>Dedicated exercises to practice your accent, plus feedback after every conversation.</p>
+            <span class="tag" data-i18n="features.pronunciation.tag">Accent Coach</span>
+            <h3 data-i18n="features.pronunciation.title">Pronunciation Training</h3>
+            <p data-i18n="features.pronunciation.desc">Dedicated exercises to practice your accent, plus feedback after every conversation.</p>
           </div>
         </div>
       </div>
@@ -1434,29 +1463,29 @@ body {
 <section class="how-it-works" id="how-it-works">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">How It Works</span>
-      <h2>From zero to speaking in <span class="gradient-text">4 simple steps</span></h2>
-      <p>No complicated setup. No textbooks. Just start talking.</p>
+      <span class="section-label" data-i18n="howItWorks.eyebrow">How It Works</span>
+      <h2 data-i18n="howItWorks.title">From zero to speaking in <span class="gradient-text">4 simple steps</span></h2>
+      <p data-i18n="howItWorks.subtitle">No complicated setup. No textbooks. Just start talking.</p>
     </div>
     <div class="steps-grid">
       <div class="step-card reveal reveal-delay-1">
         <div class="step-number">01</div>
-        <h3>Pick a language</h3>
+        <h3 data-i18n="howItWorks.step1.title">Pick a language</h3>
         <p>Choose from 10 languages — Spanish, English, German, French, Italian, and more. Set your CEFR level from A1 (beginner) to C2 (native).</p>
       </div>
       <div class="step-card reveal reveal-delay-2">
         <div class="step-number">02</div>
-        <h3>Choose a scenario</h3>
+        <h3 data-i18n="howItWorks.step2.title">Choose a scenario</h3>
         <p>At a cafe, job interview, asking directions &mdash; or just go free-form. Your tutor adapts to any topic.</p>
       </div>
       <div class="step-card reveal reveal-delay-3">
         <div class="step-number">03</div>
-        <h3>Talk naturally</h3>
+        <h3 data-i18n="howItWorks.step3.title">Talk naturally</h3>
         <p>Speak with your AI tutor using voice or text. Get response suggestions when you're stuck. No judgment, just practice.</p>
       </div>
       <div class="step-card reveal reveal-delay-4">
         <div class="step-number">04</div>
-        <h3>Review &amp; grow</h3>
+        <h3 data-i18n="howItWorks.step4.title">Review &amp; grow</h3>
         <p>See every mistake color-coded with corrections. Save new words to flashcards. Watch your progress on the dashboard.</p>
       </div>
     </div>
@@ -1467,18 +1496,18 @@ body {
 <section class="pricing" id="pricing">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">Pricing</span>
-      <h2>Start free. <span class="gradient-text">Upgrade when ready.</span></h2>
-      <p>Try Fonvo with no commitment. Upgrade to unlock everything.</p>
+      <span class="section-label" data-i18n="pricing.eyebrow">Pricing</span>
+      <h2 data-i18n="pricing.title">Start free. <span class="gradient-text">Upgrade when ready.</span></h2>
+      <p data-i18n="pricing.subtitle">Try Fonvo with no commitment. Upgrade to unlock everything.</p>
     </div>
     <div class="pricing-grid">
       <div class="pricing-card reveal reveal-delay-1">
-        <h3>Free</h3>
+        <h3 data-i18n="pricing.free.name">Free</h3>
         <div class="pricing-price">
-          <span class="amount">$0</span>
-          <span class="period">/forever</span>
+          <span class="amount" data-i18n="pricing.free.price">$0</span>
+          <span class="period" data-i18n="pricing.free.period">/forever</span>
         </div>
-        <p class="pricing-annual">No credit card required</p>
+        <p class="pricing-annual" data-i18n="pricing.free.note">No credit card required</p>
         <ul class="pricing-features">
           <li><span class="check yes">&#10003;</span> 3 conversations per day</li>
           <li><span class="check yes">&#10003;</span> Basic error analysis</li>
@@ -1488,16 +1517,16 @@ body {
           <li><span class="check no">&mdash;</span> Pronunciation training</li>
           <li><span class="check no">&mdash;</span> Unlimited flashcards</li>
         </ul>
-        <a href="#" class="pricing-btn outline">Get Started Free</a>
+        <a href="#" class="pricing-btn outline" data-i18n="pricing.free.cta">Get Started Free</a>
       </div>
       <div class="pricing-card featured reveal reveal-delay-2">
-        <div class="pricing-popular">Most Popular</div>
-        <h3>Premium</h3>
+        <div class="pricing-popular" data-i18n="pricing.premium.badge">Most Popular</div>
+        <h3 data-i18n="pricing.premium.name">Premium</h3>
         <div class="pricing-price">
-          <span class="amount gradient-text">$8</span>
-          <span class="period">/month</span>
+          <span class="amount gradient-text" data-i18n="pricing.premium.price">$8</span>
+          <span class="period" data-i18n="pricing.premium.period">/month</span>
         </div>
-        <p class="pricing-annual">or $60/year (save 37%)</p>
+        <p class="pricing-annual" data-i18n="pricing.premium.note">or $60/year (save 37%)</p>
         <ul class="pricing-features">
           <li><span class="check yes">&#10003;</span> Unlimited conversations</li>
           <li><span class="check yes">&#10003;</span> Full error analysis</li>
@@ -1507,7 +1536,7 @@ body {
           <li><span class="check yes">&#10003;</span> All scenarios</li>
           <li><span class="check yes">&#10003;</span> Priority AI models</li>
         </ul>
-        <a href="#" class="pricing-btn gradient">Start Free Trial</a>
+        <a href="#" class="pricing-btn gradient" data-i18n="pricing.premium.cta">Start Free Trial</a>
       </div>
     </div>
   </div>
@@ -1557,8 +1586,8 @@ body {
 <section class="cta">
   <div class="container">
     <div class="cta-inner reveal">
-      <h2>Ready to start speaking?</h2>
-      <p>Join learners practicing real conversations every day. Free to start, no credit card required.</p>
+      <h2 data-i18n="cta.title">Ready to start speaking?</h2>
+      <p data-i18n="cta.subtitle">Join learners practicing real conversations every day. Free to start, no credit card required.</p>
       <div class="cta-actions">
         <a href="#" class="btn-primary">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -1577,25 +1606,25 @@ body {
         <a href="#" class="nav-logo">
           <svg viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,0) scale(0.41)"><path d="m161.3 5h-44.31c-9.85 0-16.89 8.92-16.89 18.93v9.39h-3.16v-9.84c0-7.76 2.54-14.41 8.39-18.48h-12.7c-5 0-9 4-9 9v108c0 5 4 9 9 9h13.72c5 0 9-4 9-9v-28.04c0-1 0.59-1.64 1.38-1.64h28.33c5.17 0 6.86-5.3 6.86-7.63v-18.36c0-4.47-3.54-8.82-7.26-8.82h-27.56c-1.22 0-1.75-1.06-1.75-1.89v-13.53c0-1.43 1.06-2.41 2.28-2.41h4.88v12.78l15.02-12.78h23.67c5.16 0 7.32-4.32 7.32-6.87v-20.73c0-3.96-2.88-7.08-7.22-7.08zm-36.53 21.41c-3.08 0-4.28-2.48-4.28-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.23 1.85 4.23 4.21 0 2.06-1.62 4.04-3.94 4.04zm14.02 0c-2.62 0-4.12-2.32-4.12-4.04 0-2.36 1.68-4.21 3.99-4.21 2.76 0 4.14 1.85 4.14 4.21 0 2.06-1.86 4.04-4.01 4.04zm13.57 0c-2.62 0-3.59-2.32-3.59-3.77 0-2.36 1.52-4.48 3.83-4.48 2.76 0 3.41 2.12 3.41 4.21 0 2.06-1.5 4.04-3.65 4.04z" fill="url(#flc_icon)"/></g><g transform="translate(74,10)"><path d="m23.34 11h-12.84c-8.15 0-10.52 4.78-10.52 12.11v10.9c0 7.33 2.37 11.48 10.52 11.48h12.84c8.15 0 11.37-3.31 11.37-11.48v-10.9c0-7.33-3.22-12.11-11.37-12.11zm1.17 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/><path d="m64.43 10.6h-0.92c-5.16 0-8.99 2.03-12.16 4.21l-0.55-3.81h-9.32v34.49h10.09v-23.3c1.7-1.89 4.12-2.81 7.74-2.81 3.22 0 4.29 1.4 4.29 4.62v21.49h10.76v-23.79c0-6.72-3.56-11.1-9.93-11.1z" fill="url(#flc_text)"/><path d="m95.13 34.1-6.88-23.07h-12.01l13.91 34.49h11.73l11.96-34.49h-10.36l-8.35 23.07z" fill="url(#flc_text)"/><path d="m140.23 11h-12.84c-8.15 0-11 4.78-11 12.11v10.9c0 7.33 2.85 11.48 11 11.48h12.84c8.15 0 11.11-3.31 11.11-11.48v-10.9c0-7.33-2.96-12.11-11.11-12.11zm0.69 22.52c0 2.73-1.06 3.79-3.27 3.79h-7.44c-2.21 0-3.28-1.06-3.28-3.79v-10.58c0-2.53 0.92-3.78 3.28-3.78h7.44c2.57 0 3.27 1.65 3.27 3.78v10.58z" fill="url(#flc_text)"/></g><defs><linearGradient id="flc_icon" x1="42.83" x2="151.6" y1="119.6" y2="10.89" gradientUnits="userSpaceOnUse"><stop stop-color="#4A2169" offset="0"/><stop stop-color="#9B3D96" offset=".48"/><stop stop-color="#FF9A23" offset="1"/></linearGradient><linearGradient id="flc_text" x1="0" x2="155" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop stop-color="#9B3D96" offset="0"/><stop stop-color="#FF9A23" offset="1"/></linearGradient></defs></svg>
         </a>
-        <p>The language app that actually listens.</p>
+        <p data-i18n="footer.tagline">The language app that actually listens.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
-          <h4>Product</h4>
+          <h4 data-i18n="footer.product">Product</h4>
           <a href="#features">Features</a>
           <a href="#pricing">Pricing</a>
           <a href="#tutors">Tutors</a>
         </div>
         <div class="footer-col">
-          <h4>Legal</h4>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="mailto:contact@fonvo.app">Contact</a>
+          <h4 data-i18n="footer.legal">Legal</h4>
+          <a href="privacy.html" data-i18n="footer.privacyPolicy">Privacy Policy</a>
+          <a href="terms.html" data-i18n="footer.termsOfService">Terms of Service</a>
+          <a href="mailto:contact@fonvo.app" data-i18n="footer.contact">Contact</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Fonvo. All rights reserved.</p>
+      <p data-i18n="footer.copyright">&copy; 2026 Fonvo. All rights reserved.</p>
       <a href="#" class="app-store-badge">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         <div><small>Download on the</small>App Store</div>
@@ -1987,6 +2016,7 @@ document.addEventListener('pointerleave', () => {
   glowCards.forEach(card => card.style.setProperty('--glow-active', '0'));
 });
 
+
 // ===== Smooth scroll for anchor links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', (e) => {
@@ -1998,5 +2028,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 </script>
+<script src="scripts/i18n.js"></script>
 </body>
 </html>
