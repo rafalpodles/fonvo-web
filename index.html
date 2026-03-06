@@ -463,7 +463,7 @@ body {
   font-weight: 500;
 }
 
-/* ========== FEATURES ========== */
+/* ========== FEATURES (Bento Grid) ========== */
 .features { padding: 120px 0; }
 .section-header {
   text-align: center;
@@ -492,134 +492,174 @@ body {
   color: var(--text-secondary);
   line-height: 1.7;
 }
-.feature-row {
+
+/* Bento grid layout */
+.bento-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-  margin-bottom: 120px;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-auto-rows: auto;
+  gap: 12px;
 }
-.feature-row:last-child { margin-bottom: 0; }
-.feature-row.reversed .feature-text { order: 2; }
-.feature-row.reversed .feature-visual { order: 1; }
-.feature-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--magenta);
-  margin-bottom: 12px;
+
+/* Glowing card wrapper */
+.glow-card {
+  position: relative;
+  border-radius: 20px;
+  padding: 2px;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  z-index: 1;
 }
-.feature-tag-soon {
-  background: linear-gradient(135deg, var(--amber), var(--coral));
-  color: white;
-  padding: 2px 10px;
-  border-radius: 100px;
-  font-size: 11px;
+.glow-card:hover { transform: translateY(-3px); }
+/* Bottom cards on top so phones aren't covered */
+.bento-grid > .glow-card:nth-child(4) { z-index: 2; }
+.bento-grid > .glow-card:nth-child(5) { z-index: 3; }
+.bento-grid > .glow-card:nth-child(6) { z-index: 4; }
+.bento-grid > .glow-card:nth-child(7) { z-index: 5; }
+
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from calc(var(--glow-angle, 0) * 1deg) at 50% 50%,
+    transparent 0deg,
+    #9B3D96 calc(var(--glow-spread, 40) * 0.5deg),
+    #FF9A23 calc(var(--glow-spread, 40) * 1deg),
+    #4A2169 calc(var(--glow-spread, 40) * 1.5deg),
+    transparent calc(var(--glow-spread, 40) * 2deg)
+  );
+  opacity: var(--glow-active, 0);
+  transition: opacity 0.4s;
+  z-index: 0;
 }
-.feature-text h3 {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from calc(var(--glow-angle, 0) * 1deg) at 50% 50%,
+    transparent 0deg,
+    rgba(155,61,150,0.3) calc(var(--glow-spread, 40) * 0.5deg),
+    rgba(255,154,35,0.2) calc(var(--glow-spread, 40) * 1deg),
+    rgba(74,33,105,0.3) calc(var(--glow-spread, 40) * 1.5deg),
+    transparent calc(var(--glow-spread, 40) * 2deg)
+  );
+  filter: blur(16px);
+  opacity: var(--glow-active, 0);
+  transition: opacity 0.4s;
+  z-index: -1;
 }
-.feature-text p {
-  font-size: 16px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 24px;
+
+/* Inner bento card */
+.b {
+  position: relative;
+  z-index: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  height: 100%;
 }
-.feature-bullets {
-  list-style: none;
+/* Cards with peek screenshots need overflow visible */
+.b--errors, .b--vocab, .b--scenarios, .b--level, .b--progress, .b--pronunciation {
+  overflow: visible;
+  background: transparent;
+}
+.b--errors .b-body, .b--vocab .b-body, .b--scenarios .b-body,
+.b--level .b-body, .b--progress .b-body, .b--pronunciation .b-body {
+  background: var(--surface);
+  border-radius: 0 0 18px 18px;
+}
+.glow-card:has(.b-thumb-peek) {
+  overflow: visible;
+}
+.b-body { padding: 22px; }
+.b h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin-bottom: 5px; line-height: 1.25; color: var(--text); }
+.b p { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
+.b .tag {
+  display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 6px; padding: 3px 10px; border-radius: 100px;
+}
+.phone-mini { background: #1a1025; border-radius: 16px; padding: 4px; border: 1.5px solid rgba(255,255,255,0.1); overflow: hidden; display: inline-block; }
+.phone-mini img { display: block; border-radius: 12px; width: 100%; height: auto; }
+
+/* Voice card: tall left */
+.glow-card--voice { grid-row: 1 / 3; }
+.b--voice { display: flex; flex-direction: column; background: linear-gradient(135deg, #1a1025, #2a1540); }
+.b--voice .b-visual {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 28px 20px 12px; position: relative;
+}
+.b--voice .b-visual::before {
+  content: ''; position: absolute;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(155,61,150,0.2) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.b--voice .phone-mini { max-width: 175px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative; z-index: 1; }
+.b--voice .tag { background: rgba(255,154,35,0.15); color: var(--amber); }
+.b--voice h3 { font-size: 24px; color: white; }
+.b--voice p { color: rgba(255,255,255,0.7); }
+
+/* Peek phone thumbnails */
+.b-thumb-peek {
+  height: 140px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.feature-bullets li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 15px;
-  color: var(--text-secondary);
-}
-.feature-bullets li::before {
-  content: '✓';
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(155, 61, 150, 0.12), rgba(255, 154, 35, 0.08));
-  margin-top: 2px;
-  display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--magenta);
-}
-.feature-visual {
   position: relative;
+  overflow: visible;
+  clip-path: inset(0 0 0 0 round 18px 18px 0 0);
+  transition: clip-path 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.feature-screenshot {
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto;
+.glow-card:hover .b-thumb-peek {
+  clip-path: inset(-300px -20px 0 -20px);
+}
+.b-thumb-peek .phone-mini {
+  max-width: 160px;
   position: relative;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+  z-index: 10;
+  transform: translateY(65%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.1);
 }
-.feature-screenshot:hover {
-  transform: translateY(-8px);
+.glow-card:hover .b-thumb-peek .phone-mini {
+  transform: translateY(0%);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
 }
-.feature-screenshot:hover .feature-phone-frame {
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
+.b-thumb-peek::after {
+  content: ''; position: absolute;
+  width: 120px; height: 120px;
+  border-radius: 50%;
 }
-.feature-phone-frame {
-  background: #1a1025;
-  border-radius: 40px;
-  padding: 10px;
-  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255,255,255,0.08);
-  position: relative;
-  overflow: hidden;
-}
-.feature-phone-screen {
-  border-radius: 30px;
-  overflow: hidden;
-  position: relative;
-}
-.feature-phone-screen::before {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 76px;
-  height: 22px;
-  background: #1a1025;
-  border-radius: 14px;
-  z-index: 2;
-}
-.feature-phone-screen::after {
-  content: '';
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 86px;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
-  z-index: 2;
-}
-.feature-phone-screen img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+
+/* Peek card backgrounds */
+.b-thumb-peek.errors-bg { background: linear-gradient(135deg, rgba(255,107,107,0.06), rgba(155,61,150,0.04)); }
+.b-thumb-peek.errors-bg::after { right: -30px; top: -30px; background: radial-gradient(circle, rgba(255,107,107,0.12), transparent 70%); }
+.b-thumb-peek.vocab-bg { background: linear-gradient(135deg, rgba(255,154,35,0.05), rgba(255,154,35,0.02)); }
+.b-thumb-peek.vocab-bg::after { left: -30px; bottom: -30px; background: radial-gradient(circle, rgba(255,154,35,0.1), transparent 70%); }
+.b-thumb-peek.scenarios-bg { background: linear-gradient(135deg, rgba(255,154,35,0.06), rgba(255,154,35,0.02)); }
+.b-thumb-peek.scenarios-bg::after { right: -20px; bottom: -20px; background: radial-gradient(circle, rgba(255,154,35,0.1), transparent 70%); }
+.b-thumb-peek.level-bg { background: linear-gradient(135deg, rgba(74,144,217,0.06), rgba(74,144,217,0.02)); }
+.b-thumb-peek.level-bg::after { left: -20px; top: -20px; background: radial-gradient(circle, rgba(74,144,217,0.1), transparent 70%); }
+.b-thumb-peek.progress-bg { background: linear-gradient(135deg, rgba(78,205,196,0.06), rgba(78,205,196,0.02)); }
+.b-thumb-peek.progress-bg::after { right: -20px; top: -20px; background: radial-gradient(circle, rgba(78,205,196,0.1), transparent 70%); }
+.b-thumb-peek.pronunciation-bg { background: linear-gradient(135deg, rgba(155,61,150,0.06), rgba(74,33,105,0.03)); }
+.b-thumb-peek.pronunciation-bg::after { left: -20px; bottom: -20px; background: radial-gradient(circle, rgba(155,61,150,0.1), transparent 70%); }
+
+/* Tag colors per card */
+.b--errors .tag { background: rgba(255,107,107,0.12); color: var(--coral); }
+.b--vocab .tag { background: rgba(255,154,35,0.12); color: var(--amber); }
+.b--scenarios .tag { background: rgba(255,154,35,0.12); color: var(--amber); }
+.b--level .tag { background: rgba(74,144,217,0.12); color: #4A90D9; }
+.b--progress .tag { background: rgba(78,205,196,0.12); color: var(--mint); }
+.b--pronunciation .tag { background: rgba(155,61,150,0.12); color: var(--magenta); }
+
+.error-dots { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.dot-label { font-size: 10px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
 
 /* ========== HOW IT WORKS ========== */
@@ -1127,6 +1167,9 @@ body {
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
+  .bento-grid { grid-template-columns: 1fr 1fr; }
+  .glow-card--voice { grid-row: auto; grid-column: 1 / 3; }
+  .glow-card[style*="grid-column"] { grid-column: 1 / 3 !important; }
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
@@ -1159,14 +1202,9 @@ body {
   .hero p { max-width: 100%; }
   .hero-actions { justify-content: center; }
   .hero-phone { margin-top: 20px; }
-  .feature-row {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .feature-row.reversed .feature-text,
-  .feature-row.reversed .feature-visual { order: unset; }
-  .feature-visual { order: -1; }
-  .feature-screenshot { max-width: 240px; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .glow-card--voice { grid-row: auto; }
+  .glow-card[style*="grid-column"] { grid-column: auto !important; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .steps-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
@@ -1283,94 +1321,112 @@ body {
       <p>Not just a chatbot. A complete learning system that turns every conversation into progress.</p>
     </div>
 
-    <!-- Feature 1: Learning Loop -->
-    <div class="feature-row">
-      <div class="feature-text reveal from-left">
-        <span class="feature-tag">Core Feature</span>
-        <h3>Complete Learning Loop</h3>
-        <p>Talk, get feedback, learn new words, review with flashcards &mdash; everything connected in one seamless cycle.</p>
-        <ul class="feature-bullets">
-          <li>AI analyzes every mistake after each session</li>
-          <li>New words auto-extracted into your vocabulary</li>
-          <li>SM-2 spaced repetition flashcards</li>
-          <li>Weak words naturally appear in future conversations</li>
-        </ul>
-      </div>
-      <div class="feature-visual reveal from-right">
-        <div class="feature-screenshot">
-          <div class="feature-phone-frame"><div class="feature-phone-screen">
-            <img src="assets/screenshots/transcript-error-review.jpg" alt="Post-conversation transcript with color-coded error analysis">
-          </div></div>
+    <div class="bento-grid">
+
+      <!-- VOICE -->
+      <div class="glow-card glow-card--voice">
+        <div class="b b--voice">
+          <div class="b-visual">
+            <div class="phone-mini"><img src="assets/screenshots/voice-conversation-spanish.jpg" alt="Voice conversation"></div>
+          </div>
+          <div class="b-body">
+            <span class="tag">Core Feature</span>
+            <h3>Talk Like You Mean It</h3>
+            <p>Just speak. Your tutor responds instantly — no buttons, no pauses. Like talking to a real person.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Feature 2: Realtime Voice -->
-    <div class="feature-row reversed">
-      <div class="feature-text reveal from-right">
-        <span class="feature-tag">Breakthrough Tech</span>
-        <h3>Realtime Voice Conversations</h3>
-        <p>No buttons. No waiting. Just talk naturally and your AI tutor responds in under a second, with server-side voice detection handling the flow.</p>
-        <ul class="feature-bullets">
-          <li>~300ms response time via WebSocket</li>
-          <li>Hands-free with Voice Activity Detection</li>
-          <li>Natural turn-taking, like a real conversation</li>
-          <li>Classic tap-to-talk mode also available</li>
-        </ul>
-      </div>
-      <div class="feature-visual reveal from-left">
-        <div class="feature-screenshot">
-          <div class="feature-phone-frame"><div class="feature-phone-screen">
-            <img src="assets/screenshots/text-chat-english.jpg" alt="Realtime conversation with AI tutor Alfie in text chat mode">
-          </div></div>
+      <!-- ERRORS -->
+      <div class="glow-card">
+        <div class="b b--errors">
+          <div class="b-thumb-peek errors-bg">
+            <div class="phone-mini"><img src="assets/screenshots/transcript-error-review.jpg" alt="Error analysis"></div>
+          </div>
+          <div class="b-body">
+            <span class="tag">Smart Feedback</span>
+            <h3>See Every Mistake</h3>
+            <p>Every error highlighted, explained, and corrected after each conversation.</p>
+            <div class="error-dots">
+              <span class="dot-label"><span class="dot" style="background:var(--coral)"></span>Grammar</span>
+              <span class="dot-label"><span class="dot" style="background:var(--amber)"></span>Vocabulary</span>
+              <span class="dot-label"><span class="dot" style="background:#4A90D9"></span>Structure</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Feature 3: Tutors -->
-    <div class="feature-row">
-      <div class="feature-text reveal from-left">
-        <span class="feature-tag">Personal Touch</span>
-        <h3>10 Animated Tutors With Personality</h3>
-        <p>Each language comes with a unique AI character who has their own personality, teaching style, and animated expressions. Not a generic chatbot &mdash; your personal tutor.</p>
-        <ul class="feature-bullets">
-          <li>Animated reactions: speaking, thinking, listening</li>
-          <li>Personality-driven conversations</li>
-          <li>Adaptive difficulty based on your CEFR level</li>
-          <li>10 languages: Spanish, English, German, Polish, French, Italian, Portuguese, Japanese, Korean, Chinese</li>
-        </ul>
-      </div>
-      <div class="feature-visual reveal from-right">
-        <div class="feature-screenshot">
-          <div class="feature-phone-frame"><div class="feature-phone-screen">
-            <img src="assets/screenshots/home-english-tutor.jpg" alt="Home screen with Alfie — your English AI tutor">
-          </div></div>
+      <!-- VOCAB -->
+      <div class="glow-card">
+        <div class="b b--vocab">
+          <div class="b-thumb-peek vocab-bg">
+            <div class="phone-mini"><img src="assets/screenshots/vocabulary-list.jpg" alt="Vocabulary list"></div>
+          </div>
+          <div class="b-body">
+            <span class="tag">Remember Everything</span>
+            <h3>Words That Stick</h3>
+            <p>New words saved automatically. Smart flashcards bring them back at the perfect time.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Feature 4: Pronunciation -->
-    <div class="feature-row reversed">
-      <div class="feature-text reveal from-right">
-        <span class="feature-tag">Coming Soon <span class="feature-tag-soon">New</span></span>
-        <h3>Pronunciation Training</h3>
-        <p>Dedicated exercises to drill your pronunciation, plus integrated feedback after every conversation so you know exactly what to improve.</p>
-        <ul class="feature-bullets">
-          <li>Standalone pronunciation module</li>
-          <li>Post-conversation pronunciation feedback</li>
-          <li>Visual feedback and comparison</li>
-          <li>Track improvement over time</li>
-        </ul>
-      </div>
-      <div class="feature-visual reveal from-left">
-        <div class="feature-screenshot">
-          <div class="feature-phone-frame"><div class="feature-phone-screen">
-            <img src="assets/screenshots/progress-dashboard.jpg" alt="Progress dashboard with conversation stats, streaks, and score charts">
-          </div></div>
+      <!-- SCENARIOS -->
+      <div class="glow-card">
+        <div class="b b--scenarios">
+          <div class="b-thumb-peek scenarios-bg">
+            <div class="phone-mini"><img src="assets/screenshots/conversation-topics.jpg" alt="Conversation topics"></div>
+          </div>
+          <div class="b-body">
+            <span class="tag">Real Practice</span>
+            <h3>44+ Real Scenarios</h3>
+            <p>Café, job interview, airport, hotel — or just chat freely. Your tutor adapts to any topic.</p>
+          </div>
         </div>
       </div>
-    </div>
 
+      <!-- LEVEL -->
+      <div class="glow-card">
+        <div class="b b--level">
+          <div class="b-thumb-peek level-bg">
+            <div class="phone-mini"><img src="assets/screenshots/settings-level-select.jpg" alt="Level selection"></div>
+          </div>
+          <div class="b-body">
+            <span class="tag">Personalized</span>
+            <h3>Adapts to Your Level</h3>
+            <p>From total beginner to near-native. Vocabulary and complexity adjust as you improve.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="glow-card">
+        <div class="b b--progress">
+          <div class="b-thumb-peek progress-bg">
+            <div class="phone-mini"><img src="assets/screenshots/progress-dashboard.jpg" alt="Progress dashboard"></div>
+          </div>
+          <div class="b-body">
+            <span class="tag">Insights</span>
+            <h3>Track Your Progress</h3>
+            <p>Charts, streaks, and scores — see how far you've come and what still needs work.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRONUNCIATION -->
+      <div class="glow-card" style="grid-column: 2 / 4;">
+        <div class="b b--pronunciation">
+          <div class="b-thumb-peek pronunciation-bg">
+            <div class="phone-mini"><img src="assets/screenshots/text-chat-english.jpg" alt="Pronunciation practice"></div>
+          </div>
+          <div class="b-body">
+            <span class="tag">Accent Coach</span>
+            <h3>Pronunciation Training</h3>
+            <p>Dedicated exercises to practice your accent, plus feedback after every conversation.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1896,6 +1952,40 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// ===== Bento grid glow effect =====
+const glowCards = document.querySelectorAll('.glow-card');
+
+document.addEventListener('pointermove', (e) => {
+  const mx = e.clientX;
+  const my = e.clientY;
+
+  glowCards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    const proximity = 120;
+    const isNear =
+      mx > rect.left - proximity &&
+      mx < rect.right + proximity &&
+      my > rect.top - proximity &&
+      my < rect.bottom + proximity;
+
+    if (!isNear) {
+      card.style.setProperty('--glow-active', '0');
+      return;
+    }
+
+    const angle = Math.atan2(my - cy, mx - cx) * (180 / Math.PI) + 90;
+    card.style.setProperty('--glow-angle', angle.toFixed(1));
+    card.style.setProperty('--glow-active', '1');
+  });
+});
+
+document.addEventListener('pointerleave', () => {
+  glowCards.forEach(card => card.style.setProperty('--glow-active', '0'));
+});
 
 // ===== Smooth scroll for anchor links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
