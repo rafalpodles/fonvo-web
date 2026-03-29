@@ -1125,59 +1125,117 @@ body {
   opacity: 0.7;
 }
 
-/* ========== SOCIAL PROOF ========== */
-.social-proof {
+/* ========== COMPARISON ========== */
+.comparison {
   padding: 120px 0;
 }
-.social-proof-quotes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-.proof-quote {
-  background: white;
+.comparison-table {
+  max-width: 800px;
+  margin: 48px auto 0;
   border-radius: var(--radius-lg);
-  padding: 32px;
+  overflow: hidden;
   border: 1px solid var(--border);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  background: white;
 }
-.proof-quote:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+.comparison-header {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  background: var(--surface-warm);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
 }
-.proof-quote p {
+.comparison-col-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+.comparison-col-fonvo {
+  color: var(--magenta);
+}
+.comparison-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.comparison-row:last-child { border-bottom: none; }
+.comparison-row:hover { background: rgba(155, 61, 150, 0.02); }
+.comparison-feature {
   font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-.proof-quote strong { color: var(--text); }
-.proof-author {
+  font-weight: 500;
+  color: var(--text);
   display: flex;
   align-items: center;
-  gap: 12px;
 }
-.proof-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--gradient);
-  color: white;
+.comparison-cell {
+  font-size: 14px;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  color: var(--text-secondary);
+}
+.comparison-cell.comparison-no { color: var(--text-muted); }
+.comparison-cell.comparison-highlight {
+  color: var(--purple);
+  font-weight: 600;
+}
+
+/* ========== LEARNING LOOP (replaces social proof) ========== */
+.learning-loop {
+  padding: 120px 0;
+}
+.loop-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+.loop-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 160px;
+}
+.loop-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(155, 61, 150, 0.08), rgba(255, 154, 35, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  color: var(--magenta);
+}
+.loop-step h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
   font-weight: 700;
-  flex-shrink: 0;
+  margin-bottom: 6px;
 }
-.proof-author strong {
-  display: block;
-  font-size: 14px;
-  color: var(--text);
+.loop-step p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
-.proof-author span:not(.proof-avatar) {
-  font-size: 12px;
+.loop-arrow {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
   color: var(--text-muted);
+}
+.loop-arrow-return {
+  color: var(--magenta);
+}
+.loop-step-reinforce .loop-icon {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(155, 61, 150, 0.1));
+  color: var(--mint);
 }
 
 /* ========== CTA ========== */
@@ -1273,7 +1331,13 @@ body {
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .steps-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-  .social-proof-quotes { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .comparison-header, .comparison-row { grid-template-columns: 1.2fr 1fr 1fr; padding: 12px 16px; }
+  .comparison-feature, .comparison-cell { font-size: 13px; }
+  .loop-steps { gap: 8px; }
+  .loop-step { max-width: 130px; }
+  .loop-arrow { display: none; }
+  .loop-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .loop-step { max-width: none; }
   .cta-inner { padding: 60px 24px; }
   .footer-inner { flex-direction: column; gap: 32px; }
   .footer-links { gap: 24px; }
@@ -1319,8 +1383,8 @@ body {
   </div>
   <div class="container hero-inner">
     <div class="hero-content">
-      <h1 class="reveal reveal-delay-1" data-i18n="hero.title">Learn languages by <span class="animated-gradient">actually speaking them</span></h1>
-      <p class="reveal reveal-delay-2" data-i18n="hero.subtitle">Practice real conversations with AI tutors who adapt to your level, correct your mistakes, and help you build vocabulary &mdash; all through natural voice.</p>
+      <h1 class="reveal reveal-delay-1" data-i18n="hero.title">Speak Spanish with <span class="animated-gradient">Luna</span> today</h1>
+      <p class="reveal reveal-delay-2" data-i18n="hero.subtitle">Your AI conversation coach. Talk, get corrected, build vocabulary &mdash; and watch your mistakes become lessons that stick. One conversation a day is all it takes.</p>
       <div class="hero-actions reveal reveal-delay-3">
         <a href="#" class="btn-primary">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -1497,6 +1561,54 @@ body {
   </div>
 </section>
 
+<!-- ===== COMPARISON ===== -->
+<section class="comparison" id="comparison">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label" data-i18n="comparison.eyebrow">Fonvo vs. Generic AI</span>
+      <h2 data-i18n="comparison.title">ChatGPT can chat. <span class="gradient-text">Fonvo teaches.</span></h2>
+      <p data-i18n="comparison.subtitle">Voice assistants are great for chatting. But chatting isn't learning. Here's what Fonvo adds.</p>
+    </div>
+    <div class="comparison-table reveal">
+      <div class="comparison-header">
+        <div class="comparison-feature-label"></div>
+        <div class="comparison-col-label" data-i18n="comparison.generic">Generic AI Chat</div>
+        <div class="comparison-col-label comparison-col-fonvo" data-i18n="comparison.fonvo">Fonvo</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-feature" data-i18n="comparison.row1.feature">Conversation practice</div>
+        <div class="comparison-cell comparison-yes" data-i18n="comparison.row1.generic">Generic chat</div>
+        <div class="comparison-cell comparison-yes comparison-highlight" data-i18n="comparison.row1.fonvo">44+ real-world scenarios</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-feature" data-i18n="comparison.row2.feature">Error correction</div>
+        <div class="comparison-cell comparison-no" data-i18n="comparison.row2.generic">Only if you ask</div>
+        <div class="comparison-cell comparison-yes comparison-highlight" data-i18n="comparison.row2.fonvo">Automatic after every chat</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-feature" data-i18n="comparison.row3.feature">Vocabulary tracking</div>
+        <div class="comparison-cell comparison-no" data-i18n="comparison.row3.generic">None</div>
+        <div class="comparison-cell comparison-yes comparison-highlight" data-i18n="comparison.row3.fonvo">Auto-extracted + SRS flashcards</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-feature" data-i18n="comparison.row4.feature">Progress tracking</div>
+        <div class="comparison-cell comparison-no" data-i18n="comparison.row4.generic">None</div>
+        <div class="comparison-cell comparison-yes comparison-highlight" data-i18n="comparison.row4.fonvo">Dashboard, streaks, CEFR levels</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-feature" data-i18n="comparison.row5.feature">Pronunciation feedback</div>
+        <div class="comparison-cell comparison-no" data-i18n="comparison.row5.generic">None</div>
+        <div class="comparison-cell comparison-yes comparison-highlight" data-i18n="comparison.row5.fonvo">Dedicated training mode</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-feature" data-i18n="comparison.row6.feature">Remembers your weak spots</div>
+        <div class="comparison-cell comparison-no" data-i18n="comparison.row6.generic">No memory</div>
+        <div class="comparison-cell comparison-yes comparison-highlight" data-i18n="comparison.row6.fonvo">Weak spots reinforced in future chats</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== HOW IT WORKS ===== -->
 <section class="how-it-works" id="how-it-works">
   <div class="container">
@@ -1580,41 +1692,61 @@ body {
   </div>
 </section>
 
-<!-- ===== SOCIAL PROOF ===== -->
-<section class="social-proof">
+<!-- ===== LEARNING LOOP ===== -->
+<section class="learning-loop">
   <div class="container">
-    <div class="social-proof-inner reveal">
-      <div class="social-proof-quotes">
-        <div class="proof-quote">
-          <p data-i18n="social.quote1">"I've tried Duolingo, Babbel, and others — Fonvo is the first app where I actually <strong>speak</strong>. After 2 weeks I had a real conversation in Spanish."</p>
-          <div class="proof-author">
-            <span class="proof-avatar">M</span>
-            <div>
-              <strong data-i18n="social.author1">Marta K.</strong>
-              <span data-i18n="social.role1">Learning Spanish</span>
-            </div>
-          </div>
+    <div class="section-header reveal">
+      <span class="section-label" data-i18n="loop.eyebrow">The Learning Loop</span>
+      <h2 data-i18n="loop.title">Every conversation makes you <span class="gradient-text">measurably better</span></h2>
+      <p data-i18n="loop.subtitle">Not just chat. A complete system that turns mistakes into progress.</p>
+    </div>
+    <div class="loop-steps reveal">
+      <div class="loop-step">
+        <div class="loop-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="m19 5-1.5 1.5"/></svg>
         </div>
-        <div class="proof-quote">
-          <p data-i18n="social.quote2">"The tutors feel surprisingly real. Luna corrected my conjugation mid-sentence and I didn't even feel judged. Game changer."</p>
-          <div class="proof-author">
-            <span class="proof-avatar">J</span>
-            <div>
-              <strong data-i18n="social.author2">James R.</strong>
-              <span data-i18n="social.role2">Learning German</span>
-            </div>
-          </div>
+        <h3 data-i18n="loop.step1.title">Speak</h3>
+        <p data-i18n="loop.step1.desc">Have a real conversation with your AI tutor in any scenario</p>
+      </div>
+      <div class="loop-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-4-4 4 4-4 4"/></svg>
+      </div>
+      <div class="loop-step">
+        <div class="loop-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
         </div>
-        <div class="proof-quote">
-          <p data-i18n="social.quote3">"Finally something beyond flashcards. The error analysis after each conversation shows me exactly what to work on."</p>
-          <div class="proof-author">
-            <span class="proof-avatar">A</span>
-            <div>
-              <strong data-i18n="social.author3">Anna L.</strong>
-              <span data-i18n="social.role3">Learning French</span>
-            </div>
-          </div>
+        <h3 data-i18n="loop.step2.title">Correct</h3>
+        <p data-i18n="loop.step2.desc">Every error is caught, categorized, and explained</p>
+      </div>
+      <div class="loop-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-4-4 4 4-4 4"/></svg>
+      </div>
+      <div class="loop-step">
+        <div class="loop-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
         </div>
+        <h3 data-i18n="loop.step3.title">Save</h3>
+        <p data-i18n="loop.step3.desc">New words are extracted and added to your personal dictionary</p>
+      </div>
+      <div class="loop-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-4-4 4 4-4 4"/></svg>
+      </div>
+      <div class="loop-step">
+        <div class="loop-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2"/><rect width="18" height="18" x="3" y="4" rx="2"/><circle cx="12" cy="10" r="2"/><line x1="8" x2="8" y1="2" y2="4"/><line x1="16" x2="16" y1="2" y2="4"/></svg>
+        </div>
+        <h3 data-i18n="loop.step4.title">Remember</h3>
+        <p data-i18n="loop.step4.desc">Smart flashcards bring words back at the perfect time (SRS)</p>
+      </div>
+      <div class="loop-arrow loop-arrow-return">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-4-4 4 4-4 4"/></svg>
+      </div>
+      <div class="loop-step loop-step-reinforce">
+        <div class="loop-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+        </div>
+        <h3 data-i18n="loop.step5.title">Reinforce</h3>
+        <p data-i18n="loop.step5.desc">Weak spots reappear in future conversations automatically</p>
       </div>
     </div>
   </div>
