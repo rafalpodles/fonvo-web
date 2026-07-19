@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.fonvo",
+      "sha256_cert_fingerprints": [
+        "B1:81:9D:42:C8:56:FC:72:BE:03:06:9C:47:A2:9E:42:1D:6B:1F:E6:BF:7C:2C:CE:DA:C7:DB:F2:59:58:58:DF"
+      ]
+    }
+  }
+]
