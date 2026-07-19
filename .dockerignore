@@ -1,0 +1,6 @@
+.git
+.git/**
+.DS_Store
+.claude
+scripts
+README.md
